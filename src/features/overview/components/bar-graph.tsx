@@ -11,14 +11,22 @@ import {
 } from '@/components/ui/chart';
 import { Badge } from '@/components/ui/badge';
 import { Icons } from '@/components/icons';
+import { useDateRange, filterDataByRange } from '@/contexts/date-range-context';
+import { useLanguage } from '@/contexts/language-context';
 
-const chartData = [
+const allChartData = [
   { month: 'January', desktop: 186, mobile: 80 },
   { month: 'February', desktop: 305, mobile: 200 },
   { month: 'March', desktop: 237, mobile: 120 },
   { month: 'April', desktop: 73, mobile: 190 },
   { month: 'May', desktop: 209, mobile: 130 },
-  { month: 'June', desktop: 214, mobile: 140 }
+  { month: 'June', desktop: 214, mobile: 140 },
+  { month: 'July', desktop: 198, mobile: 165 },
+  { month: 'August', desktop: 245, mobile: 190 },
+  { month: 'September', desktop: 267, mobile: 210 },
+  { month: 'October', desktop: 189, mobile: 155 },
+  { month: 'November', desktop: 312, mobile: 240 },
+  { month: 'December', desktop: 278, mobile: 205 }
 ];
 
 const chartConfig = {
@@ -33,17 +41,21 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function BarGraph() {
+  const { preset } = useDateRange();
+  const { t } = useLanguage();
+  const chartData = filterDataByRange(allChartData, preset);
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>
-          Bar Chart - Multiple
+          {t('overview.barChartTitle') || 'Bar Chart - Multiple'}
           <Badge variant='outline'>
             <Icons.trendingDown />
             -5.2%
           </Badge>
         </CardTitle>
-        <CardDescription>January - June 2025</CardDescription>
+        <CardDescription>{t('overview.barChartDesc') || 'January - December 2025'}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>

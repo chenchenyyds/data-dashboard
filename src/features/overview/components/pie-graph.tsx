@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/chart';
 import { Badge } from '@/components/ui/badge';
 import { Icons } from '@/components/icons';
+import { useLanguage } from '@/contexts/language-context';
 
 const chartData = [
   { browser: 'chrome', visitors: 275, fill: 'var(--color-chrome)' },
@@ -47,17 +48,18 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function PieGraph() {
+  const { t } = useLanguage();
   return (
     <Card className='flex h-full flex-col'>
       <CardHeader className='items-center pb-0'>
         <CardTitle>
-          Pie Chart
+          {t('overview.pieChartTitle') || 'Pie Chart'}
           <Badge variant='outline'>
             <Icons.trendingUp />
             +5.2%
           </Badge>
         </CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardDescription>{t('overview.pieChartDesc') || 'Browser distribution'}</CardDescription>
       </CardHeader>
       <CardContent className='flex flex-1 items-center justify-center pb-0'>
         <ChartContainer

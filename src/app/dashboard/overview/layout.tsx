@@ -11,6 +11,8 @@ import {
 } from '@/components/ui/card';
 import { Icons } from '@/components/icons';
 import { useLanguage } from '@/contexts/language-context';
+import { DateRangeProvider } from '@/contexts/date-range-context';
+import { DateRangeFilter } from '@/components/date-range-filter';
 import React from 'react';
 
 export default function OverViewLayout({
@@ -26,10 +28,12 @@ export default function OverViewLayout({
 }) {
   const { t } = useLanguage();
   return (
-    <PageContainer>
+    <DateRangeProvider>
+      <PageContainer>
       <div className='flex flex-1 flex-col space-y-2'>
         <div className='flex items-center justify-between'>
           <h2 className='text-2xl font-bold tracking-tight'>{t('overview.welcome')}</h2>
+          <DateRangeFilter />
         </div>
 
         <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs md:grid-cols-2 lg:grid-cols-4'>
@@ -125,5 +129,6 @@ export default function OverViewLayout({
         </div>
       </div>
     </PageContainer>
+    </DateRangeProvider>
   );
 }

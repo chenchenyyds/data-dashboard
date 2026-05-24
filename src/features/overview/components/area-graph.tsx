@@ -11,9 +11,11 @@ import {
 } from '@/components/ui/chart';
 import { Badge } from '@/components/ui/badge';
 import { Icons } from '@/components/icons';
+import { useDateRange, filterDataByRange } from '@/contexts/date-range-context';
+import { useLanguage } from '@/contexts/language-context';
 import React from 'react';
 
-const chartData = [
+const allChartData = [
   { month: 'January', desktop: 342, mobile: 245 },
   { month: 'February', desktop: 876, mobile: 654 },
   { month: 'March', desktop: 512, mobile: 387 },
@@ -40,17 +42,21 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function AreaGraph() {
+  const { preset } = useDateRange();
+  const { t } = useLanguage();
+  const chartData = filterDataByRange(allChartData, preset);
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>
-          Dotted Area Chart
+          {t('overview.areaChartTitle') || 'Dotted Area Chart'}
           <Badge variant='outline'>
             <Icons.trendingUp />
             -5.2%
           </Badge>
         </CardTitle>
-        <CardDescription>Showing total visitors for the last 6 months</CardDescription>
+        <CardDescription>{t('overview.areaChartDesc') || 'Showing total visitors for the last months'}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>

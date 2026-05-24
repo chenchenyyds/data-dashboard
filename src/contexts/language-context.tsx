@@ -56,7 +56,18 @@ const translations: Record<string, Record<string, string>> = {
     'user.notifications': 'Notifications',
     'lang.switch': 'Switch Language',
     'lang.en': 'English',
-    'lang.zh': '中文'
+    'lang.zh': '中文',
+    'overview.barChartTitle': 'Bar Chart - Multiple',
+    'overview.barChartDesc': 'Monthly desktop vs mobile',
+    'overview.areaChartTitle': 'Dotted Area Chart',
+    'overview.areaChartDesc': 'Showing total visitors for the period',
+    'overview.pieChartTitle': 'Pie Chart',
+    'overview.pieChartDesc': 'Browser distribution',
+    'date.7d': 'Last 7 days',
+    'date.30d': 'Last 30 days',
+    'date.90d': 'Last 90 days',
+    'date.1y': 'This year',
+    'date.all': 'All time'
   },
   zh: {
     'nav.dashboard': '仪表板',
@@ -111,7 +122,18 @@ const translations: Record<string, Record<string, string>> = {
     'user.notifications': '通知',
     'lang.switch': '切换语言',
     'lang.en': 'English',
-    'lang.zh': '中文'
+    'lang.zh': '中文',
+    'overview.barChartTitle': '柱状图 - 多组数据',
+    'overview.barChartDesc': '桌面端 vs 移动端月度对比',
+    'overview.areaChartTitle': '面积图',
+    'overview.areaChartDesc': '显示该时段的总访问量',
+    'overview.pieChartTitle': '饼图',
+    'overview.pieChartDesc': '浏览器分布',
+    'date.7d': '近7天',
+    'date.30d': '近30天',
+    'date.90d': '近90天',
+    'date.1y': '今年',
+    'date.all': '全部'
   }
 };
 
