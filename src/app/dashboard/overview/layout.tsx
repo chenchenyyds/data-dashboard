@@ -14,6 +14,8 @@ import { useLanguage } from '@/contexts/language-context';
 import { DateRangeProvider } from '@/contexts/date-range-context';
 import { DateRangeFilter } from '@/components/date-range-filter';
 import { ComparisonBadge } from '@/components/comparison-badge';
+import { Button } from '@/components/ui/button';
+import { generatePDFReport } from '@/lib/pdf-export';
 import React from 'react';
 
 export default function OverViewLayout({
@@ -32,9 +34,30 @@ export default function OverViewLayout({
     <DateRangeProvider>
       <PageContainer>
       <div className='flex flex-1 flex-col space-y-2'>
-        <div className='flex items-center justify-between'>
+        <div className='flex items-center justify-between gap-2 flex-wrap'>
           <h2 className='text-2xl font-bold tracking-tight'>{t('overview.welcome')}</h2>
-          <DateRangeFilter />
+          <div className='flex items-center gap-2'>
+            <DateRangeFilter />
+            <Button
+              variant='outline'
+              size='sm'
+              onClick={() =>
+                generatePDFReport({
+                  totalRevenue: '$1,250.00',
+                  newCustomers: '1,234',
+                  activeAccounts: '45,678',
+                  growthRate: '4.5%',
+                  revenueMoM: '+12.5%',
+                  customersMoM: '-20%',
+                  accountsMoM: '+12.5%',
+                  growthMoM: '+4.5%',
+                })
+              }
+            >
+              <Icons.fileTypePdf className='mr-1 size-4' />
+              {t('overview.download')}
+            </Button>
+          </div>
         </div>
 
         <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs md:grid-cols-2 lg:grid-cols-4'>
