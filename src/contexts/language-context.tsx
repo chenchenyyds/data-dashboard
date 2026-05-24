@@ -54,6 +54,7 @@ const translations: Record<string, Record<string, string>> = {
     'user.newTeam': 'New Team',
     'user.signOut': 'Sign Out',
     'user.notifications': 'Notifications',
+    'nav.reports': 'Reports',
     'lang.switch': 'Switch Language',
     'lang.en': 'English',
     'lang.zh': '中文',
@@ -69,7 +70,10 @@ const translations: Record<string, Record<string, string>> = {
     'date.1y': 'This year',
     'date.all': 'All time',
     'overview.vsLastMonth': 'vs last month',
-    'overview.vsLastYear': 'vs last year'
+    'overview.vsLastYear': 'vs last year',
+    'services.price': 'Price',
+    'orders.orderId': 'Order ID',
+    'orders.date': 'Date'
   },
   zh: {
     'nav.dashboard': '仪表板',
@@ -122,6 +126,7 @@ const translations: Record<string, Record<string, string>> = {
     'user.newTeam': '新建团队',
     'user.signOut': '退出登录',
     'user.notifications': '通知',
+    'nav.reports': '报表',
     'lang.switch': '切换语言',
     'lang.en': 'English',
     'lang.zh': '中文',
@@ -137,7 +142,10 @@ const translations: Record<string, Record<string, string>> = {
     'date.1y': '今年',
     'date.all': '全部',
     'overview.vsLastMonth': '环比上月',
-    'overview.vsLastYear': '同比去年'
+    'overview.vsLastYear': '同比去年',
+    'services.price': '价格',
+    'orders.orderId': '订单编号',
+    'orders.date': '日期'
   }
 };
 
