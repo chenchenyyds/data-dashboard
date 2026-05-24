@@ -8,8 +8,9 @@ import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 
 export const metadata: Metadata = {
-  title: 'Next Shadcn Dashboard Starter',
-  description: 'Basic dashboard with Next.js and Shadcn',
+  title: 'Data Dashboard — Analytics Overview',
+  description:
+    'Interactive analytics dashboard with charts, data tables, PDF export, and role-based views',
   robots: {
     index: false,
     follow: false
