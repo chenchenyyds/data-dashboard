@@ -73,7 +73,9 @@ const translations: Record<string, Record<string, string>> = {
     'overview.vsLastYear': 'vs last year',
     'services.price': 'Price',
     'orders.orderId': 'Order ID',
-    'orders.date': 'Date'
+    'orders.date': 'Date',
+    'overview.adminViewDesc': 'You see summary KPI cards and charts.',
+    'overview.managerViewDesc': 'You see detailed transaction data.'
   },
   zh: {
     'nav.dashboard': '仪表板',
@@ -145,7 +147,9 @@ const translations: Record<string, Record<string, string>> = {
     'overview.vsLastYear': '同比去年',
     'services.price': '价格',
     'orders.orderId': '订单编号',
-    'orders.date': '日期'
+    'orders.date': '日期',
+    'overview.adminViewDesc': '您看到的是汇总KPI卡片和图表。',
+    'overview.managerViewDesc': '您看到的是详细交易数据。'
   }
 };
 

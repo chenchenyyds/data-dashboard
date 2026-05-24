@@ -16,6 +16,7 @@ import { DateRangeFilter } from '@/components/date-range-filter';
 import { ComparisonBadge } from '@/components/comparison-badge';
 import { Button } from '@/components/ui/button';
 import { generatePDFReport } from '@/lib/pdf-export';
+import { RoleView, RoleBadge } from '@/components/role-view';
 import React from 'react';
 
 export default function OverViewLayout({
@@ -33,117 +34,122 @@ export default function OverViewLayout({
   return (
     <DateRangeProvider>
       <PageContainer>
-      <div className='flex flex-1 flex-col space-y-2'>
-        <div className='flex items-center justify-between gap-2 flex-wrap'>
-          <h2 className='text-2xl font-bold tracking-tight'>{t('overview.welcome')}</h2>
-          <div className='flex items-center gap-2'>
-            <DateRangeFilter />
-            <Button
-              variant='outline'
-              size='sm'
-              onClick={() =>
-                generatePDFReport({
-                  totalRevenue: '$1,250.00',
-                  newCustomers: '1,234',
-                  activeAccounts: '45,678',
-                  growthRate: '4.5%',
-                  revenueMoM: '+12.5%',
-                  customersMoM: '-20%',
-                  accountsMoM: '+12.5%',
-                  growthMoM: '+4.5%',
-                })
-              }
-            >
-              <Icons.fileTypePdf className='mr-1 size-4' />
-              {t('overview.download')}
-            </Button>
-          </div>
-        </div>
+      <RoleBadge />
+      <RoleView
+        adminView={
+          <div className='flex flex-1 flex-col space-y-2'>
+            <div className='flex items-center justify-between gap-2 flex-wrap'>
+              <h2 className='text-2xl font-bold tracking-tight'>{t('overview.welcome')}</h2>
+              <div className='flex items-center gap-2'>
+                <DateRangeFilter />
+                <Button
+                  variant='outline'
+                  size='sm'
+                  onClick={() =>
+                    generatePDFReport({
+                      totalRevenue: '$1,250.00',
+                      newCustomers: '1,234',
+                      activeAccounts: '45,678',
+                      growthRate: '4.5%',
+                      revenueMoM: '+12.5%',
+                      customersMoM: '-20%',
+                      accountsMoM: '+12.5%',
+                      growthMoM: '+4.5%',
+                    })
+                  }
+                >
+                  <Icons.fileTypePdf className='mr-1 size-4' />
+                  {t('overview.download')}
+                </Button>
+              </div>
+            </div>
 
-        <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs md:grid-cols-2 lg:grid-cols-4'>
-          <Card className='@container/card'>
-            <CardHeader>
-              <CardDescription>{t('overview.totalRevenue')}</CardDescription>
-              <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
-                $1,250.00
-              </CardTitle>
-              <CardAction>
-                <Badge variant='outline'>
-                  <Icons.trendingUp />
-                  +12.5%
-                </Badge>
-              </CardAction>
-            </CardHeader>
-            <CardFooter className='flex-col items-start gap-1 text-sm'>
-              <ComparisonBadge mom={12.5} />
-              <ComparisonBadge yoy={8.3} />
-            </CardFooter>
-          </Card>
-          <Card className='@container/card'>
-            <CardHeader>
-              <CardDescription>{t('overview.newCustomers')}</CardDescription>
-              <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
-                1,234
-              </CardTitle>
-              <CardAction>
-                <Badge variant='outline'>
-                  <Icons.trendingDown />
-                  -20%
-                </Badge>
-              </CardAction>
-            </CardHeader>
-            <CardFooter className='flex-col items-start gap-1 text-sm'>
-              <ComparisonBadge mom={-20} />
-              <ComparisonBadge yoy={5.1} />
-            </CardFooter>
-          </Card>
-          <Card className='@container/card'>
-            <CardHeader>
-              <CardDescription>{t('overview.activeAccounts')}</CardDescription>
-              <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
-                45,678
-              </CardTitle>
-              <CardAction>
-                <Badge variant='outline'>
-                  <Icons.trendingUp />
-                  +12.5%
-                </Badge>
-              </CardAction>
-            </CardHeader>
-            <CardFooter className='flex-col items-start gap-1 text-sm'>
-              <ComparisonBadge mom={12.5} />
-              <ComparisonBadge yoy={22.4} />
-            </CardFooter>
-          </Card>
-          <Card className='@container/card'>
-            <CardHeader>
-              <CardDescription>{t('overview.growthRate')}</CardDescription>
-              <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
-                4.5%
-              </CardTitle>
-              <CardAction>
-                <Badge variant='outline'>
-                  <Icons.trendingUp />
-                  +4.5%
-                </Badge>
-              </CardAction>
-            </CardHeader>
-            <CardFooter className='flex-col items-start gap-1 text-sm'>
-              <ComparisonBadge mom={4.5} />
-              <ComparisonBadge yoy={1.2} />
-            </CardFooter>
-          </Card>
-        </div>
-        <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7'>
-          <div className='col-span-4'>{bar_stats}</div>
-          <div className='col-span-4 md:col-span-3'>
-            {/* sales arallel routes */}
-            {sales}
+            <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs md:grid-cols-2 lg:grid-cols-4'>
+              <Card className='@container/card'>
+                <CardHeader>
+                  <CardDescription>{t('overview.totalRevenue')}</CardDescription>
+                  <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
+                    $1,250.00
+                  </CardTitle>
+                  <CardAction>
+                    <Badge variant='outline'>
+                      <Icons.trendingUp />
+                      +12.5%
+                    </Badge>
+                  </CardAction>
+                </CardHeader>
+                <CardFooter className='flex-col items-start gap-1 text-sm'>
+                  <ComparisonBadge mom={12.5} />
+                  <ComparisonBadge yoy={8.3} />
+                </CardFooter>
+              </Card>
+              <Card className='@container/card'>
+                <CardHeader>
+                  <CardDescription>{t('overview.newCustomers')}</CardDescription>
+                  <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
+                    1,234
+                  </CardTitle>
+                  <CardAction>
+                    <Badge variant='outline'>
+                      <Icons.trendingDown />
+                      -20%
+                    </Badge>
+                  </CardAction>
+                </CardHeader>
+                <CardFooter className='flex-col items-start gap-1 text-sm'>
+                  <ComparisonBadge mom={-20} />
+                  <ComparisonBadge yoy={5.1} />
+                </CardFooter>
+              </Card>
+              <Card className='@container/card'>
+                <CardHeader>
+                  <CardDescription>{t('overview.activeAccounts')}</CardDescription>
+                  <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
+                    45,678
+                  </CardTitle>
+                  <CardAction>
+                    <Badge variant='outline'>
+                      <Icons.trendingUp />
+                      +12.5%
+                    </Badge>
+                  </CardAction>
+                </CardHeader>
+                <CardFooter className='flex-col items-start gap-1 text-sm'>
+                  <ComparisonBadge mom={12.5} />
+                  <ComparisonBadge yoy={22.4} />
+                </CardFooter>
+              </Card>
+              <Card className='@container/card'>
+                <CardHeader>
+                  <CardDescription>{t('overview.growthRate')}</CardDescription>
+                  <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
+                    4.5%
+                  </CardTitle>
+                  <CardAction>
+                    <Badge variant='outline'>
+                      <Icons.trendingUp />
+                      +4.5%
+                    </Badge>
+                  </CardAction>
+                </CardHeader>
+                <CardFooter className='flex-col items-start gap-1 text-sm'>
+                  <ComparisonBadge mom={4.5} />
+                  <ComparisonBadge yoy={1.2} />
+                </CardFooter>
+              </Card>
+            </div>
+            <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7'>
+              <div className='col-span-4'>{bar_stats}</div>
+              <div className='col-span-4 md:col-span-3'>
+                {/* sales arallel routes */}
+                {sales}
+              </div>
+              <div className='col-span-4'>{area_stats}</div>
+              <div className='col-span-4 min-h-0 md:col-span-3'>{pie_stats}</div>
+            </div>
           </div>
-          <div className='col-span-4'>{area_stats}</div>
-          <div className='col-span-4 min-h-0 md:col-span-3'>{pie_stats}</div>
-        </div>
-      </div>
+        }
+      />
     </PageContainer>
     </DateRangeProvider>
   );
