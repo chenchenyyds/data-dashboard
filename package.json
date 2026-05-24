@@ -1,9 +1,10 @@
 {
-  "name": "next-shadcn-dashboard-starter",
+  "name": "data-dashboard",
   "version": "1.0.0",
   "private": true,
   "author": {
-    "name": "Kiran",
+    "name": "chenchenyyds",
+    "url": "https://github.com/chenchenyyds"
     "url": "https://github.com/Kiranism"
   },
   "scripts": {

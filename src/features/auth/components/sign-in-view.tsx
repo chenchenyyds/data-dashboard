@@ -60,8 +60,8 @@ export default function SignInViewPage() {
         <div className='flex w-full max-w-md flex-col items-center justify-center space-y-6'>
           {/* github link  */}
           <GitHubStarsButton
-            owner='kiranism'
-            repo='next-shadcn-dashboard-starter'
+            owner='chenchenyyds'
+            repo='data-dashboard'
             showRepo
             variant='outline'
             size='default'
@@ -81,7 +81,7 @@ export default function SignInViewPage() {
             </p>
             <p>
               <Link
-                href='https://github.com/kiranism/next-shadcn-dashboard-starter'
+                href='https://github.com/chenchenyyds/data-dashboard'
                 target='_blank'
                 className='hover:text-primary underline underline-offset-4'
               >
