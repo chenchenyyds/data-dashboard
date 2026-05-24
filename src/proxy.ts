@@ -1,9 +1,8 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse, NextFetchEvent } from 'next/server';
 
 const isProtectedRoute = createRouteMatcher(['/dashboard(.*)']);
 
-// Gracefully handle missing Clerk configuration for portfolio demo
 const hasClerkConfig =
   process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
   process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY !== 'pk_test_placeholder' &&
@@ -14,16 +13,17 @@ if (!hasClerkConfig) {
   console.warn('[auth] Clerk keys not configured — dashboard is publicly accessible (demo mode)');
 }
 
-const clerkHandler = clerkMiddleware(async (auth, req: NextRequest) => {
-  if (isProtectedRoute(req)) await auth.protect();
-});
+const clerkHandler = hasClerkConfig
+  ? clerkMiddleware(async (auth, req: NextRequest) => {
+      if (isProtectedRoute(req)) await auth.protect();
+    })
+  : null;
 
-export default function middleware(req: NextRequest) {
-  if (!hasClerkConfig) {
-    // Demo mode: skip auth, allow all access
+export default function middleware(req: NextRequest, event: NextFetchEvent) {
+  if (!clerkHandler) {
     return NextResponse.next();
   }
-  return clerkHandler(req);
+  return clerkHandler(req, event);
 }
 
 export const config = {
