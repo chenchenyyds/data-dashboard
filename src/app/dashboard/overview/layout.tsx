@@ -1,3 +1,4 @@
+'use client';
 import PageContainer from '@/components/layout/page-container';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -9,6 +10,7 @@ import {
   CardFooter
 } from '@/components/ui/card';
 import { Icons } from '@/components/icons';
+import { useLanguage } from '@/contexts/language-context';
 import React from 'react';
 
 export default function OverViewLayout({
@@ -22,17 +24,18 @@ export default function OverViewLayout({
   bar_stats: React.ReactNode;
   area_stats: React.ReactNode;
 }) {
+  const { t } = useLanguage();
   return (
     <PageContainer>
       <div className='flex flex-1 flex-col space-y-2'>
         <div className='flex items-center justify-between'>
-          <h2 className='text-2xl font-bold tracking-tight'>Hi, Welcome back 👋</h2>
+          <h2 className='text-2xl font-bold tracking-tight'>{t('overview.welcome')}</h2>
         </div>
 
         <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs md:grid-cols-2 lg:grid-cols-4'>
           <Card className='@container/card'>
             <CardHeader>
-              <CardDescription>Total Revenue</CardDescription>
+              <CardDescription>{t('overview.totalRevenue')}</CardDescription>
               <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
                 $1,250.00
               </CardTitle>
@@ -45,14 +48,14 @@ export default function OverViewLayout({
             </CardHeader>
             <CardFooter className='flex-col items-start gap-1.5 text-sm'>
               <div className='line-clamp-1 flex gap-2 font-medium'>
-                Trending up this month <Icons.trendingUp className='size-4' />
+                {t('overview.trendingUp')} <Icons.trendingUp className='size-4' />
               </div>
-              <div className='text-muted-foreground'>Visitors for the last 6 months</div>
+              <div className='text-muted-foreground'>{t('overview.visitors6m')}</div>
             </CardFooter>
           </Card>
           <Card className='@container/card'>
             <CardHeader>
-              <CardDescription>New Customers</CardDescription>
+              <CardDescription>{t('overview.newCustomers')}</CardDescription>
               <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
                 1,234
               </CardTitle>
@@ -65,14 +68,14 @@ export default function OverViewLayout({
             </CardHeader>
             <CardFooter className='flex-col items-start gap-1.5 text-sm'>
               <div className='line-clamp-1 flex gap-2 font-medium'>
-                Down 20% this period <Icons.trendingDown className='size-4' />
+                {t('overview.down20')} <Icons.trendingDown className='size-4' />
               </div>
-              <div className='text-muted-foreground'>Acquisition needs attention</div>
+              <div className='text-muted-foreground'>{t('overview.acquisitionNeeds')}</div>
             </CardFooter>
           </Card>
           <Card className='@container/card'>
             <CardHeader>
-              <CardDescription>Active Accounts</CardDescription>
+              <CardDescription>{t('overview.activeAccounts')}</CardDescription>
               <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
                 45,678
               </CardTitle>
@@ -85,14 +88,14 @@ export default function OverViewLayout({
             </CardHeader>
             <CardFooter className='flex-col items-start gap-1.5 text-sm'>
               <div className='line-clamp-1 flex gap-2 font-medium'>
-                Strong user retention <Icons.trendingUp className='size-4' />
+                {t('overview.strongRetention')} <Icons.trendingUp className='size-4' />
               </div>
-              <div className='text-muted-foreground'>Engagement exceed targets</div>
+              <div className='text-muted-foreground'>{t('overview.engagementExceed')}</div>
             </CardFooter>
           </Card>
           <Card className='@container/card'>
             <CardHeader>
-              <CardDescription>Growth Rate</CardDescription>
+              <CardDescription>{t('overview.growthRate')}</CardDescription>
               <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
                 4.5%
               </CardTitle>
@@ -105,9 +108,9 @@ export default function OverViewLayout({
             </CardHeader>
             <CardFooter className='flex-col items-start gap-1.5 text-sm'>
               <div className='line-clamp-1 flex gap-2 font-medium'>
-                Steady performance increase <Icons.trendingUp className='size-4' />
+                {t('overview.steadyPerformance')} <Icons.trendingUp className='size-4' />
               </div>
-              <div className='text-muted-foreground'>Meets growth projections</div>
+              <div className='text-muted-foreground'>{t('overview.meetsProjections')}</div>
             </CardFooter>
           </Card>
         </div>

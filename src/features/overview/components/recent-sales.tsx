@@ -1,5 +1,7 @@
+'use client';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '@/components/ui/card';
+import { useLanguage } from '@/contexts/language-context';
 
 const salesData = [
   {
@@ -40,11 +42,12 @@ const salesData = [
 ];
 
 export function RecentSales() {
+  const { t } = useLanguage();
   return (
     <Card className='h-full'>
       <CardHeader>
-        <CardTitle>Recent Sales</CardTitle>
-        <CardDescription>You made 265 sales this month.</CardDescription>
+        <CardTitle>{t('overview.recentSales')}</CardTitle>
+        <CardDescription>{t('overview.salesThisMonth')}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className='space-y-8'>

@@ -10,11 +10,13 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { UserAvatarProfile } from '@/components/user-avatar-profile';
+import { useLanguage } from '@/contexts/language-context';
 import { SignOutButton, useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 export function UserNav() {
   const { user } = useUser();
   const router = useRouter();
+  const { t } = useLanguage();
   if (user) {
     return (
       <DropdownMenu>
@@ -35,11 +37,11 @@ export function UserNav() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem onClick={() => router.push('/dashboard/profile')}>
-              Profile
+              {t('user.profile')}
             </DropdownMenuItem>
-            <DropdownMenuItem>Billing</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>New Team</DropdownMenuItem>
+            <DropdownMenuItem>{t('user.billing')}</DropdownMenuItem>
+            <DropdownMenuItem>{t('user.settings')}</DropdownMenuItem>
+            <DropdownMenuItem>{t('user.newTeam')}</DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem>

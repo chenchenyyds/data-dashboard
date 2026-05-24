@@ -1,6 +1,8 @@
+'use client';
 import React from 'react';
 import { Heading } from '../ui/heading';
 import type { InfobarContent } from '@/components/ui/infobar';
+import { useLanguage } from '@/contexts/language-context';
 
 function PageSkeleton() {
   return (
@@ -36,13 +38,13 @@ export default function PageContainer({
   infoContent?: InfobarContent;
   pageHeaderAction?: React.ReactNode;
 }) {
+  const { t } = useLanguage();
+
   if (!access) {
     return (
       <div className='flex flex-1 items-center justify-center p-4 md:px-6'>
         {accessFallback ?? (
-          <div className='text-muted-foreground text-center text-lg'>
-            You do not have access to this page.
-          </div>
+          <div className='text-muted-foreground text-center text-lg'>{t('common.noAccess')}</div>
         )}
       </div>
     );

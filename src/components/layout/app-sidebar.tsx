@@ -29,6 +29,7 @@ import { navGroups } from '@/config/nav-config';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { useOrganization, useUser } from '@clerk/nextjs';
 import { useFilteredNavGroups } from '@/hooks/use-nav';
+import { useLanguage } from '@/contexts/language-context';
 import { SignOutButton } from '@clerk/nextjs';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -42,6 +43,7 @@ export default function AppSidebar() {
   const { user } = useUser();
   const { organization } = useOrganization();
   const router = useRouter();
+  const { t } = useLanguage();
   const filteredGroups = useFilteredNavGroups(navGroups);
 
   React.useEffect(() => {
@@ -142,17 +144,17 @@ export default function AppSidebar() {
                 <DropdownMenuGroup>
                   <DropdownMenuItem onClick={() => router.push('/dashboard/profile')}>
                     <Icons.account className='mr-2 h-4 w-4' />
-                    Profile
+                    {t('user.profile')}
                   </DropdownMenuItem>
                   {organization && (
                     <DropdownMenuItem onClick={() => router.push('/dashboard/billing')}>
                       <Icons.creditCard className='mr-2 h-4 w-4' />
-                      Billing
+                      {t('user.billing')}
                     </DropdownMenuItem>
                   )}
                   <DropdownMenuItem onClick={() => router.push('/dashboard/notifications')}>
                     <Icons.notification className='mr-2 h-4 w-4' />
-                    Notifications
+                    {t('user.notifications')}
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
