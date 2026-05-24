@@ -5,7 +5,6 @@
   "author": {
     "name": "chenchenyyds",
     "url": "https://github.com/chenchenyyds"
-    "url": "https://github.com/Kiranism"
   },
   "scripts": {
     "dev": "node scripts/postinstall.js 2>/dev/null; next dev",
