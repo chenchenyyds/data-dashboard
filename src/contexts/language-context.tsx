@@ -67,7 +67,9 @@ const translations: Record<string, Record<string, string>> = {
     'date.30d': 'Last 30 days',
     'date.90d': 'Last 90 days',
     'date.1y': 'This year',
-    'date.all': 'All time'
+    'date.all': 'All time',
+    'overview.vsLastMonth': 'vs last month',
+    'overview.vsLastYear': 'vs last year'
   },
   zh: {
     'nav.dashboard': '仪表板',
@@ -133,7 +135,9 @@ const translations: Record<string, Record<string, string>> = {
     'date.30d': '近30天',
     'date.90d': '近90天',
     'date.1y': '今年',
-    'date.all': '全部'
+    'date.all': '全部',
+    'overview.vsLastMonth': '环比上月',
+    'overview.vsLastYear': '同比去年'
   }
 };
 

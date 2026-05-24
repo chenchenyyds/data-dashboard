@@ -13,6 +13,7 @@ import { Icons } from '@/components/icons';
 import { useLanguage } from '@/contexts/language-context';
 import { DateRangeProvider } from '@/contexts/date-range-context';
 import { DateRangeFilter } from '@/components/date-range-filter';
+import { ComparisonBadge } from '@/components/comparison-badge';
 import React from 'react';
 
 export default function OverViewLayout({
@@ -50,11 +51,9 @@ export default function OverViewLayout({
                 </Badge>
               </CardAction>
             </CardHeader>
-            <CardFooter className='flex-col items-start gap-1.5 text-sm'>
-              <div className='line-clamp-1 flex gap-2 font-medium'>
-                {t('overview.trendingUp')} <Icons.trendingUp className='size-4' />
-              </div>
-              <div className='text-muted-foreground'>{t('overview.visitors6m')}</div>
+            <CardFooter className='flex-col items-start gap-1 text-sm'>
+              <ComparisonBadge mom={12.5} />
+              <ComparisonBadge yoy={8.3} />
             </CardFooter>
           </Card>
           <Card className='@container/card'>
@@ -70,11 +69,9 @@ export default function OverViewLayout({
                 </Badge>
               </CardAction>
             </CardHeader>
-            <CardFooter className='flex-col items-start gap-1.5 text-sm'>
-              <div className='line-clamp-1 flex gap-2 font-medium'>
-                {t('overview.down20')} <Icons.trendingDown className='size-4' />
-              </div>
-              <div className='text-muted-foreground'>{t('overview.acquisitionNeeds')}</div>
+            <CardFooter className='flex-col items-start gap-1 text-sm'>
+              <ComparisonBadge mom={-20} />
+              <ComparisonBadge yoy={5.1} />
             </CardFooter>
           </Card>
           <Card className='@container/card'>
@@ -90,11 +87,9 @@ export default function OverViewLayout({
                 </Badge>
               </CardAction>
             </CardHeader>
-            <CardFooter className='flex-col items-start gap-1.5 text-sm'>
-              <div className='line-clamp-1 flex gap-2 font-medium'>
-                {t('overview.strongRetention')} <Icons.trendingUp className='size-4' />
-              </div>
-              <div className='text-muted-foreground'>{t('overview.engagementExceed')}</div>
+            <CardFooter className='flex-col items-start gap-1 text-sm'>
+              <ComparisonBadge mom={12.5} />
+              <ComparisonBadge yoy={22.4} />
             </CardFooter>
           </Card>
           <Card className='@container/card'>
@@ -110,11 +105,9 @@ export default function OverViewLayout({
                 </Badge>
               </CardAction>
             </CardHeader>
-            <CardFooter className='flex-col items-start gap-1.5 text-sm'>
-              <div className='line-clamp-1 flex gap-2 font-medium'>
-                {t('overview.steadyPerformance')} <Icons.trendingUp className='size-4' />
-              </div>
-              <div className='text-muted-foreground'>{t('overview.meetsProjections')}</div>
+            <CardFooter className='flex-col items-start gap-1 text-sm'>
+              <ComparisonBadge mom={4.5} />
+              <ComparisonBadge yoy={1.2} />
             </CardFooter>
           </Card>
         </div>
