@@ -7,11 +7,14 @@ import { PokemonInfo } from '@/features/react-query-demo/components/pokemon-info
 import PageContainer from '@/components/layout/page-container';
 import { Suspense } from 'react';
 import { PokemonSkeleton } from '@/features/react-query-demo/components/pokemon-skeleton';
-import { reactQueryInfoContent } from '@/features/react-query-demo/info-content';
+import {
+  reactQueryInfoContent,
+  reactQueryInfoContentZh
+} from '@/features/react-query-demo/info-content';
 import { useLanguage } from '@/contexts/language-context';
 
 export default function ReactQueryPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const queryClient = getQueryClient();
 
   // Prefetch on the client — data is ready before hydration
@@ -21,7 +24,7 @@ export default function ReactQueryPage() {
     <PageContainer
       pageTitle={t('page.reactQuery.title')}
       pageDescription={t('page.reactQuery.desc')}
-      infoContent={reactQueryInfoContent}
+      infoContent={language === 'zh' ? reactQueryInfoContentZh : reactQueryInfoContent}
     >
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Suspense fallback={<PokemonSkeleton />}>

@@ -1,6 +1,7 @@
 'use client';
 
 import { Icons } from '@/components/icons';
+import { useLanguage } from '@/contexts/language-context';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,10 +30,11 @@ export function NavProjects({
   }[];
 }) {
   const { isMobile } = useSidebar();
+  const { t } = useLanguage();
 
   return (
     <SidebarGroup className='group-data-[collapsible=icon]:hidden'>
-      <SidebarGroupLabel>Projects</SidebarGroupLabel>
+      <SidebarGroupLabel>{t('nav.projects')}</SidebarGroupLabel>
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
@@ -46,7 +48,7 @@ export function NavProjects({
               <DropdownMenuTrigger asChild>
                 <SidebarMenuAction showOnHover>
                   <Icons.dots />
-                  <span className='sr-only'>More</span>
+                  <span className='sr-only'>{t('nav.more')}</span>
                 </SidebarMenuAction>
               </DropdownMenuTrigger>
               <DropdownMenuContent
@@ -56,16 +58,16 @@ export function NavProjects({
               >
                 <DropdownMenuItem>
                   <Icons.workspace className='text-muted-foreground mr-2 h-4 w-4' />
-                  <span>View Project</span>
+                  <span>{t('nav.viewProject')}</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Icons.share className='text-muted-foreground mr-2 h-4 w-4' />
-                  <span>Share Project</span>
+                  <span>{t('nav.shareProject')}</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <Icons.trash className='text-muted-foreground mr-2 h-4 w-4' />
-                  <span>Delete Project</span>
+                  <span>{t('nav.deleteProject')}</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -74,7 +76,7 @@ export function NavProjects({
         <SidebarMenuItem>
           <SidebarMenuButton className='text-sidebar-foreground/70'>
             <Icons.dots className='text-sidebar-foreground/70' />
-            <span>More</span>
+            <span>{t('nav.more')}</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>

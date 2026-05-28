@@ -8,7 +8,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable,
+  useReactTable
 } from '@tanstack/react-table';
 import {
   Table,
@@ -16,7 +16,7 @@ import {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -31,7 +31,7 @@ import { mockReports, type ReportRow } from '../mock-data';
 const statusVariant: Record<ReportRow['status'], 'default' | 'secondary' | 'outline'> = {
   Completed: 'default',
   Pending: 'secondary',
-  Refunded: 'outline',
+  Refunded: 'outline'
 };
 
 export function ReportsTable() {
@@ -43,49 +43,52 @@ export function ReportsTable() {
     () => [
       {
         accessorKey: 'id',
-        header: t('orders.orderId') || 'Order ID',
+        header: t('orders.orderId') || 'Order ID'
       },
       {
         accessorKey: 'date',
         header: t('orders.date') || 'Date',
-        sortingFn: 'datetime',
+        sortingFn: 'datetime'
       },
       {
         accessorKey: 'customer',
-        header: t('overview.newCustomers') || 'Customer',
+        header: t('common.customer') || 'Customer'
       },
       {
         accessorKey: 'product',
-        header: 'Product',
+        header: t('reports.column.product') || 'Product'
       },
       {
         accessorKey: 'category',
-        header: 'Category',
+        header: t('reports.column.category') || 'Category'
       },
       {
         accessorKey: 'quantity',
-        header: 'Qty',
-        cell: ({ getValue }) => <span className="tabular-nums">{getValue<number>()}</span>,
+        header: t('reports.column.qty') || 'Qty',
+        cell: ({ getValue }) => <span className='tabular-nums'>{getValue<number>()}</span>
       },
       {
         accessorKey: 'price',
-        header: t('services.price') || 'Price',
-        cell: ({ getValue }) => `$${getValue<number>()}`,
+        header: t('reports.column.price') || 'Price',
+        cell: ({ getValue }) => `$${getValue<number>()}`
       },
       {
         accessorKey: 'total',
-        header: 'Total',
-        cell: ({ getValue }) => <span className="font-medium tabular-nums">${getValue<number>()}</span>,
+        header: t('reports.column.total') || 'Total',
+        cell: ({ getValue }) => (
+          <span className='font-medium tabular-nums'>${getValue<number>()}</span>
+        )
       },
       {
         accessorKey: 'status',
-        header: 'Status',
+        header: t('reports.column.status') || 'Status',
         cell: ({ getValue }) => {
           const s = getValue<ReportRow['status']>();
-          return <Badge variant={statusVariant[s]}>{s}</Badge>;
+          const statusKey = s.toLowerCase();
+          return <Badge variant={statusVariant[s]}>{t('reports.status.' + statusKey) || s}</Badge>;
         },
-        filterFn: 'equals',
-      },
+        filterFn: 'equals'
+      }
     ],
     [t]
   );
@@ -99,7 +102,7 @@ export function ReportsTable() {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    initialState: { pagination: { pageSize: 10 } },
+    initialState: { pagination: { pageSize: 10 } }
   });
 
   const handleExportCSV = () => {
@@ -107,46 +110,50 @@ export function ReportsTable() {
       .filter((c) => 'accessorKey' in c && c.accessorKey)
       .map((c) => ({
         key: (c as { accessorKey: string }).accessorKey,
-        header: (c.header as string) || (c as { accessorKey: string }).accessorKey,
+        header: (c.header as string) || (c as { accessorKey: string }).accessorKey
       }));
     const rows = table.getFilteredRowModel().rows.map((r) => r.original);
-    exportToCSV(rows as unknown as Record<string, unknown>[], csvColumns, `reports-${new Date().toISOString().slice(0, 10)}.csv`);
+    exportToCSV(
+      rows as unknown as Record<string, unknown>[],
+      csvColumns,
+      `reports-${new Date().toISOString().slice(0, 10)}.csv`
+    );
   };
 
   return (
-    <div className="flex flex-1 flex-col space-y-4">
-      <div className="flex items-center gap-2">
-        <div className="relative flex-1">
-          <Icons.search className="absolute left-2.5 top-2.5 size-4 text-muted-foreground" />
+    <div className='flex flex-1 flex-col space-y-4'>
+      <div className='flex items-center gap-2'>
+        <div className='relative flex-1'>
+          <Icons.search className='absolute left-2.5 top-2.5 size-4 text-muted-foreground' />
           <Input
             placeholder={t('common.search') || 'Search...'}
             value={globalFilter}
             onChange={(e) => setGlobalFilter(e.target.value)}
-            className="h-9 pl-8 w-full md:max-w-sm"
+            className='h-9 pl-8 w-full md:max-w-sm'
           />
         </div>
-        <Button variant="outline" size="sm" onClick={handleExportCSV}>
-          <Icons.fileTypeXls className="mr-2 size-4" />
-          CSV
+        <Button variant='outline' size='sm' onClick={handleExportCSV}>
+          <Icons.fileTypeXls className='mr-2 size-4' />
+          {t('reports.export.csv') || 'CSV'}
         </Button>
       </div>
-      <div className="rounded-md border">
-        <ScrollArea className="h-[500px]">
+      <div className='rounded-md border'>
+        <ScrollArea className='h-[500px]'>
           <Table>
-            <TableHeader className="bg-muted sticky top-0 z-10">
+            <TableHeader className='bg-muted sticky top-0 z-10'>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
                     <TableHead
                       key={header.id}
-                      className="cursor-pointer select-none"
+                      className='cursor-pointer select-none'
                       onClick={header.column.getToggleSortingHandler()}
                     >
-                      <div className="flex items-center gap-1">
+                      <div className='flex items-center gap-1'>
                         {flexRender(header.column.columnDef.header, header.getContext())}
                         {{
-                          asc: <Icons.chevronUp className="size-3" />,
-                          desc: <Icons.chevronDown className="size-3" />,
+                          asc: <Icons.chevronUp className='size-3' />,
+                          desc: <Icons.chevronDown className='size-3' />
                         }[header.column.getIsSorted() as string] ?? null}
                       </div>
                     </TableHead>
@@ -167,14 +174,14 @@ export function ReportsTable() {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                  <TableCell colSpan={columns.length} className='h-24 text-center'>
                     {t('common.noResults') || 'No results.'}
                   </TableCell>
                 </TableRow>
               )}
             </TableBody>
           </Table>
-          <ScrollBar orientation="horizontal" />
+          <ScrollBar orientation='horizontal' />
         </ScrollArea>
       </div>
       <DataTablePagination table={table} />

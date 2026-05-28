@@ -14,10 +14,12 @@ import {
   CardFooter
 } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
+import { useLanguage } from '@/contexts/language-context';
 
 const POKEMON_IDS = [25, 1, 4, 7, 6, 150, 133, 39, 143, 94];
 
 export function PokemonInfo() {
+  const { t } = useLanguage();
   const [pokemonId, setPokemonId] = useState(25);
   const { data } = useSuspenseQuery(pokemonOptions(pokemonId));
 
@@ -26,11 +28,8 @@ export function PokemonInfo() {
       {/* Pokemon selector */}
       <Card>
         <CardHeader>
-          <CardTitle>Pick a Pokemon</CardTitle>
-          <CardDescription>
-            Each selection triggers <code>useSuspenseQuery</code> — cached results are instant, new
-            fetches show the Suspense fallback.
-          </CardDescription>
+          <CardTitle>{t('reactQuery.pickPokemon')}</CardTitle>
+          <CardDescription>{t('reactQuery.suspenseDesc')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className='flex flex-wrap gap-2'>
@@ -89,9 +88,7 @@ export function PokemonInfo() {
           </div>
         </CardContent>
         <CardFooter>
-          <p className='text-muted-foreground text-xs'>
-            Data from PokeAPI &middot; Prefetched on server, hydrated on client
-          </p>
+          <p className='text-muted-foreground text-xs'>{t('reactQuery.dataFrom')}</p>
         </CardFooter>
       </Card>
     </div>

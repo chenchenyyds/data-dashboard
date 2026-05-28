@@ -21,10 +21,12 @@ import {
   useSidebar
 } from '@/components/ui/sidebar';
 import { useEffect } from 'react';
+import { useLanguage } from '@/contexts/language-context';
 
 export function OrgSwitcher() {
   const { isMobile, state } = useSidebar();
   const router = useRouter();
+  const { t } = useLanguage();
   const { isLoaded, setActive, userMemberships } = useOrganizationList({
     userMemberships: {
       infinite: true,
@@ -74,8 +76,10 @@ export function OrgSwitcher() {
                   : 'visible max-w-full opacity-100'
               }`}
             >
-              <span className='truncate font-medium'>Loading...</span>
-              <span className='text-muted-foreground truncate text-xs'>Organizations</span>
+              <span className='truncate font-medium'>{t('common.loading')}</span>
+              <span className='text-muted-foreground truncate text-xs'>
+                {t('org.organizations')}
+              </span>
             </div>
           </SidebarMenuButton>
         </SidebarMenuItem>
@@ -103,8 +107,8 @@ export function OrgSwitcher() {
                   : 'visible max-w-full opacity-100'
               }`}
             >
-              <span className='truncate font-medium'>Create organization</span>
-              <span className='text-muted-foreground truncate text-xs'>Get started</span>
+              <span className='truncate font-medium'>{t('org.create')}</span>
+              <span className='text-muted-foreground truncate text-xs'>{t('org.getStarted')}</span>
             </div>
             <Icons.chevronsUpDown
               className={`ml-auto transition-all duration-200 ease-in-out ${
@@ -158,7 +162,7 @@ export function OrgSwitcher() {
                 <span className='truncate font-medium'>{displayOrganization.name}</span>
                 <span className='text-muted-foreground truncate text-xs'>
                   {userMemberships.data.find((m) => m.organization.id === displayOrganization.id)
-                    ?.role || 'Organization'}
+                    ?.role || t('org.organization')}
                 </span>
               </div>
               <Icons.chevronsUpDown
@@ -177,7 +181,7 @@ export function OrgSwitcher() {
             sideOffset={4}
           >
             <DropdownMenuLabel className='text-muted-foreground text-xs'>
-              Organizations
+              {t('org.organizations')}
             </DropdownMenuLabel>
             {userMemberships.data.map((membership, index) => {
               const isActive = membership.organization.id === orgId;
@@ -216,7 +220,7 @@ export function OrgSwitcher() {
               <div className='flex size-6 items-center justify-center rounded-md border bg-transparent'>
                 <Icons.add className='size-4' />
               </div>
-              <div className='text-muted-foreground font-medium'>Add organization</div>
+              <div className='text-muted-foreground font-medium'>{t('org.add')}</div>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

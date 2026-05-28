@@ -18,7 +18,7 @@ import type { User } from '../api/types';
 import { toast } from 'sonner';
 import * as z from 'zod';
 import { userSchema, type UserFormValues } from '../schemas/user';
-import { ROLE_OPTIONS } from './users-table/options';
+import { getRoleOptions } from './users-table/options';
 import { useLanguage } from '@/contexts/language-context';
 
 interface UserFormSheetProps {
@@ -138,7 +138,7 @@ export function UserFormSheet({ user, open, onOpenChange }: UserFormSheetProps) 
                 name='role'
                 label={t('user.role')}
                 required
-                options={ROLE_OPTIONS}
+                options={getRoleOptions(t)}
                 placeholder={t('user.rolePlaceholder')}
                 validators={{
                   onBlur: z.string().min(1, 'Please select a role')

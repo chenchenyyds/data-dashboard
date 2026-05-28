@@ -32,8 +32,8 @@ export default function KBar({ children }: { children: React.ReactNode }) {
               name: itemName,
               shortcut: navItem.shortcut,
               keywords: itemName.toLowerCase(),
-              section: 'Navigation',
-              subtitle: `Go to ${itemName}`,
+              section: t('kbar.navigation'),
+              subtitle: t('kbar.goTo', { name: itemName }),
               perform: () => navigateTo(navItem.url)
             }
           : null;
@@ -48,7 +48,7 @@ export default function KBar({ children }: { children: React.ReactNode }) {
             shortcut: childItem.shortcut,
             keywords: childName.toLowerCase(),
             section: itemName,
-            subtitle: `Go to ${childName}`,
+            subtitle: t('kbar.goTo', { name: childName }),
             perform: () => navigateTo(childItem.url)
           };
         }) ?? [];

@@ -2,17 +2,17 @@
 
 import PageContainer from '@/components/layout/page-container';
 import { OrganizationList } from '@clerk/nextjs';
-import { workspacesInfoContent } from '@/config/infoconfig';
+import { workspacesInfoContent, workspacesInfoContentZh } from '@/config/infoconfig';
 import { useLanguage } from '@/contexts/language-context';
 
 export default function WorkspacesPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <PageContainer
       pageTitle={t('page.workspaces.title')}
       pageDescription={t('page.workspaces.desc')}
-      infoContent={workspacesInfoContent}
+      infoContent={language === 'zh' ? workspacesInfoContentZh : workspacesInfoContent}
     >
       <OrganizationList
         appearance={{

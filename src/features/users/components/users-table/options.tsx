@@ -1,9 +1,10 @@
-// TODO: Translate role labels using useLanguage() at consumption point
-export const ROLE_OPTIONS = [
-  { value: 'Developer', label: 'Developer' },
-  { value: 'Designer', label: 'Designer' },
-  { value: 'Manager', label: 'Manager' },
-  { value: 'QA', label: 'QA' },
-  { value: 'DevOps', label: 'DevOps' },
-  { value: 'Product Owner', label: 'Product Owner' }
-];
+export function getRoleOptions(t: (key: string) => string) {
+  return [
+    { value: 'Developer', label: t('role.developer') },
+    { value: 'Designer', label: t('role.designer') },
+    { value: 'Manager', label: t('role.manager') },
+    { value: 'QA', label: t('role.qa') },
+    { value: 'DevOps', label: t('role.devops') },
+    { value: 'Product Owner', label: t('role.productOwner') }
+  ];
+}

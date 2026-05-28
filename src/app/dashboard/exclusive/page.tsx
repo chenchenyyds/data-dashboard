@@ -56,7 +56,7 @@ export default function ExclusivePage() {
               <CardDescription>{t('page.exclusive.desc')}</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className='text-lg'>Have a wonderful day!</div>
+              <div className='text-lg'>{t('exclusive.haveNiceDay')}</div>
             </CardContent>
           </Card>
         </div>

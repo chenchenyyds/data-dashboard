@@ -2,14 +2,16 @@
 
 import PageContainer from '@/components/layout/page-container';
 import { OrganizationProfile } from '@clerk/nextjs';
-import { teamInfoContent } from '@/config/infoconfig';
+import { teamInfoContent, teamInfoContentZh } from '@/config/infoconfig';
+import { useLanguage } from '@/contexts/language-context';
 
 export default function TeamPage() {
+  const { t, language } = useLanguage();
   return (
     <PageContainer
-      pageTitle='Team Management'
-      pageDescription='Manage your workspace team, members, roles, security and more.'
-      infoContent={teamInfoContent}
+      pageTitle={t('page.team.title')}
+      pageDescription={t('page.team.desc')}
+      infoContent={language === 'zh' ? teamInfoContentZh : teamInfoContent}
     >
       <OrganizationProfile />
     </PageContainer>

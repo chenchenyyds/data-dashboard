@@ -6,11 +6,11 @@ import { useOrganization } from '@clerk/nextjs';
 import { PricingTable } from '@clerk/nextjs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Icons } from '@/components/icons';
-import { billingInfoContent } from '@/config/infoconfig';
+import { billingInfoContent, billingInfoContentZh } from '@/config/infoconfig';
 import { useLanguage } from '@/contexts/language-context';
 
 export default function BillingPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { organization, isLoaded } = useOrganization();
 
   return (
@@ -25,7 +25,7 @@ export default function BillingPage() {
           </div>
         </div>
       }
-      infoContent={billingInfoContent}
+      infoContent={language === 'zh' ? billingInfoContentZh : billingInfoContent}
       pageTitle={t('page.billing.title')}
       pageDescription={t('page.billing.desc', { name: organization?.name || '' })}
     >
@@ -33,10 +33,7 @@ export default function BillingPage() {
         {/* Info Alert */}
         <Alert>
           <Icons.info className='h-4 w-4' />
-          <AlertDescription>
-            Plans and subscriptions are managed through Clerk Billing. Subscribe to a plan to unlock
-            features and higher limits.
-          </AlertDescription>
+          <AlertDescription>{t('billing.alert')}</AlertDescription>
         </Alert>
 
         {/* Clerk Pricing Table */}
