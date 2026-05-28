@@ -1,5 +1,6 @@
 import { searchParamsCache } from '@/lib/searchparams';
 import type { SearchParams } from 'nuqs/server';
+import UserListingPage from '@/features/users/components/user-listing';
 import UsersPageWrapper from './users-page-wrapper';
 
 export const metadata = {
@@ -14,5 +15,9 @@ export default async function UsersPage(props: PageProps) {
   const searchParams = await props.searchParams;
   searchParamsCache.parse(searchParams);
 
-  return <UsersPageWrapper />;
+  return (
+    <UsersPageWrapper>
+      <UserListingPage />
+    </UsersPageWrapper>
+  );
 }

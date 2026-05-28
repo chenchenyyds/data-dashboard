@@ -2,14 +2,13 @@
 
 import PageContainer from '@/components/layout/page-container';
 import { buttonVariants } from '@/components/ui/button';
-import ProductListingPage from '@/features/products/components/product-listing';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import Link from 'next/link';
 import { productInfoContent } from '@/config/infoconfig';
 import { useLanguage } from '@/contexts/language-context';
 
-export default function ProductPageWrapper() {
+export default function ProductPageWrapper({ children }: { children: React.ReactNode }) {
   const { t } = useLanguage();
 
   return (
@@ -23,7 +22,7 @@ export default function ProductPageWrapper() {
         </Link>
       }
     >
-      <ProductListingPage />
+      {children}
     </PageContainer>
   );
 }
