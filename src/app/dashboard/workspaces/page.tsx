@@ -3,12 +3,15 @@
 import PageContainer from '@/components/layout/page-container';
 import { OrganizationList } from '@clerk/nextjs';
 import { workspacesInfoContent } from '@/config/infoconfig';
+import { useLanguage } from '@/contexts/language-context';
 
 export default function WorkspacesPage() {
+  const { t } = useLanguage();
+
   return (
     <PageContainer
-      pageTitle='Workspaces'
-      pageDescription='Manage your workspaces and switch between them'
+      pageTitle={t('page.workspaces.title')}
+      pageDescription={t('page.workspaces.desc')}
       infoContent={workspacesInfoContent}
     >
       <OrganizationList

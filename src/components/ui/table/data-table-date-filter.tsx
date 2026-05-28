@@ -10,6 +10,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Separator } from '@/components/ui/separator';
 import { formatDate } from '@/lib/format';
+import { useLanguage } from '@/contexts/language-context';
 
 type DateSelection = Date[] | DateRange;
 
@@ -56,6 +57,7 @@ export function DataTableDateFilter<TData>({
   title,
   multiple
 }: DataTableDateFilterProps<TData>) {
+  const { t } = useLanguage();
   const columnFilterValue = column.getFilterValue();
 
   const selectedDates = React.useMemo<DateSelection>(() => {
@@ -124,7 +126,9 @@ export function DataTableDateFilter<TData>({
       if (!getIsDateRange(selectedDates)) return null;
 
       const hasSelectedDates = selectedDates.from || selectedDates.to;
-      const dateText = hasSelectedDates ? formatDateRange(selectedDates) : 'Select date range';
+      const dateText = hasSelectedDates
+        ? formatDateRange(selectedDates)
+        : t('table.selectDateRange');
 
       return (
         <span className='flex items-center gap-2'>
@@ -145,7 +149,7 @@ export function DataTableDateFilter<TData>({
     if (getIsDateRange(selectedDates)) return null;
 
     const hasSelectedDate = selectedDates.length > 0;
-    const dateText = hasSelectedDate ? formatDate(selectedDates[0]) : 'Select date';
+    const dateText = hasSelectedDate ? formatDate(selectedDates[0]) : t('table.selectDate');
 
     return (
       <span className='flex items-center gap-2'>
@@ -167,7 +171,7 @@ export function DataTableDateFilter<TData>({
           {hasValue ? (
             <button
               type='button'
-              aria-label={`Clear ${title} filter`}
+              aria-label={t('table.clearFilters')}
               onClick={onReset}
               className='focus-visible:ring-ring rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:ring-1 focus-visible:outline-none'
             >

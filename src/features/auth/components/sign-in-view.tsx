@@ -1,17 +1,15 @@
+'use client';
+
 import { buttonVariants } from '@/components/ui/button';
 import { GitHubStarsButton } from '@/components/github-stars-button';
 import { cn } from '@/lib/utils';
 import { SignIn as ClerkSignInForm } from '@clerk/nextjs';
-import { Metadata } from 'next';
 import Link from 'next/link';
 import { InteractiveGridPattern } from './interactive-grid';
-
-export const metadata: Metadata = {
-  title: 'Authentication',
-  description: 'Authentication forms built using the components.'
-};
+import { useLanguage } from '@/contexts/language-context';
 
 export default function SignInViewPage() {
+  const { t } = useLanguage();
   return (
     <div className='relative flex min-h-screen flex-col items-center justify-center overflow-hidden md:grid lg:max-w-none lg:grid-cols-2 lg:px-0'>
       <Link
@@ -21,7 +19,7 @@ export default function SignInViewPage() {
           'absolute top-4 right-4 hidden md:top-8 md:right-8'
         )}
       >
-        Login
+        {t('auth.login')}
       </Link>
       <div className='relative hidden h-full flex-col p-10 lg:flex dark:border-r'>
         <div className='absolute inset-0 bg-sidebar' />
@@ -91,19 +89,19 @@ export default function SignInViewPage() {
           </div>
 
           <p className='text-muted-foreground px-8 text-center text-sm'>
-            By clicking continue, you agree to our{' '}
+            {t('auth.byClickingContinue')}{' '}
             <Link
               href='/terms-of-service'
               className='hover:text-primary underline underline-offset-4'
             >
-              Terms of Service
+              {t('auth.termsOfService')}
             </Link>{' '}
             and{' '}
             <Link
               href='/privacy-policy'
               className='hover:text-primary underline underline-offset-4'
             >
-              Privacy Policy
+              {t('auth.privacyPolicy')}
             </Link>
             .
           </p>

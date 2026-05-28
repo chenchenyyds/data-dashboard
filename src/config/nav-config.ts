@@ -39,6 +39,7 @@ export const navGroups: NavGroup[] = [
     items: [
       {
         title: 'Dashboard',
+        translationKey: 'nav.item.dashboard',
         url: '/dashboard/overview',
         icon: 'dashboard',
         isActive: false,
@@ -47,6 +48,7 @@ export const navGroups: NavGroup[] = [
       },
       {
         title: 'Workspaces',
+        translationKey: 'nav.item.workspaces',
         url: '/dashboard/workspaces',
         icon: 'workspace',
         isActive: false,
@@ -54,6 +56,7 @@ export const navGroups: NavGroup[] = [
       },
       {
         title: 'Teams',
+        translationKey: 'nav.item.teams',
         url: '/dashboard/workspaces/team',
         icon: 'teams',
         isActive: false,
@@ -62,6 +65,7 @@ export const navGroups: NavGroup[] = [
       },
       {
         title: 'Product',
+        translationKey: 'nav.item.product',
         url: '/dashboard/product',
         icon: 'product',
         shortcut: ['p', 'p'],
@@ -70,6 +74,7 @@ export const navGroups: NavGroup[] = [
       },
       {
         title: 'Users',
+        translationKey: 'nav.item.users',
         url: '/dashboard/users',
         icon: 'teams',
         shortcut: ['u', 'u'],
@@ -78,6 +83,7 @@ export const navGroups: NavGroup[] = [
       },
       {
         title: 'Kanban',
+        translationKey: 'nav.item.kanban',
         url: '/dashboard/kanban',
         icon: 'kanban',
         shortcut: ['k', 'k'],
@@ -86,6 +92,7 @@ export const navGroups: NavGroup[] = [
       },
       {
         title: 'Chat',
+        translationKey: 'nav.item.chat',
         url: '/dashboard/chat',
         icon: 'chat',
         shortcut: ['c', 'c'],
@@ -94,6 +101,7 @@ export const navGroups: NavGroup[] = [
       },
       {
         title: 'Reports',
+        translationKey: 'nav.item.reports',
         url: '/dashboard/reports',
         icon: 'post',
         shortcut: ['r', 'r'],
@@ -107,28 +115,33 @@ export const navGroups: NavGroup[] = [
     items: [
       {
         title: 'Forms',
+        translationKey: 'nav.item.forms',
         url: '#',
         icon: 'forms',
         isActive: true,
         items: [
           {
             title: 'Basic Form',
+            translationKey: 'nav.item.basicForm',
             url: '/dashboard/forms/basic',
             icon: 'forms',
             shortcut: ['f', 'f']
           },
           {
             title: 'Multi-Step Form',
+            translationKey: 'nav.item.multiStepForm',
             url: '/dashboard/forms/multi-step',
             icon: 'forms'
           },
           {
             title: 'Sheet & Dialog',
+            translationKey: 'nav.item.sheetDialog',
             url: '/dashboard/forms/sheet-form',
             icon: 'forms'
           },
           {
             title: 'Advanced Patterns',
+            translationKey: 'nav.item.advancedPatterns',
             url: '/dashboard/forms/advanced',
             icon: 'forms'
           }
@@ -136,6 +149,7 @@ export const navGroups: NavGroup[] = [
       },
       {
         title: 'React Query',
+        translationKey: 'nav.item.reactQuery',
         url: '/dashboard/react-query',
         icon: 'code',
         isActive: false,
@@ -143,6 +157,7 @@ export const navGroups: NavGroup[] = [
       },
       {
         title: 'Icons',
+        translationKey: 'nav.item.icons',
         url: '/dashboard/elements/icons',
         icon: 'palette',
         isActive: false,
@@ -155,12 +170,14 @@ export const navGroups: NavGroup[] = [
     items: [
       {
         title: 'Pro',
+        translationKey: 'nav.item.pro',
         url: '#',
         icon: 'pro',
         isActive: true,
         items: [
           {
             title: 'Exclusive',
+            translationKey: 'nav.item.exclusive',
             url: '/dashboard/exclusive',
             icon: 'exclusive',
             shortcut: ['e', 'e']
@@ -169,24 +186,28 @@ export const navGroups: NavGroup[] = [
       },
       {
         title: 'Account',
+        translationKey: 'nav.item.account',
         url: '#',
         icon: 'account',
         isActive: true,
         items: [
           {
             title: 'Profile',
+            translationKey: 'nav.item.profile',
             url: '/dashboard/profile',
             icon: 'profile',
             shortcut: ['m', 'm']
           },
           {
             title: 'Notifications',
+            translationKey: 'nav.item.notifications',
             url: '/dashboard/notifications',
             icon: 'notification',
             shortcut: ['n', 'n']
           },
           {
             title: 'Billing',
+            translationKey: 'nav.item.billing',
             url: '/dashboard/billing',
             icon: 'billing',
             shortcut: ['b', 'b'],
@@ -194,6 +215,7 @@ export const navGroups: NavGroup[] = [
           },
           {
             title: 'Login',
+            translationKey: 'nav.item.login',
             shortcut: ['l', 'l'],
             url: '/',
             icon: 'login'

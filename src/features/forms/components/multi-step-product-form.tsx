@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useFormStepper } from '@/hooks/use-stepper';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { useLanguage } from '@/contexts/language-context';
 
 // --- Schema ---
 
@@ -47,24 +48,29 @@ const Step1Group = withFieldGroup({
     price: undefined as number | undefined
   },
   render: function Step1Render({ group }) {
+    const { t } = useLanguage();
     return (
       <div className='space-y-4'>
-        <h3 className='text-lg font-semibold'>Basic Info</h3>
+        <h3 className='text-lg font-semibold'>{t('form.multiStep.basicInfo')}</h3>
         <FieldDescription>Enter the product name, category, and price.</FieldDescription>
 
         <group.AppField name='name'>
           {(field) => (
-            <field.TextField label='Product Name' required placeholder='Enter product name' />
+            <field.TextField
+              label={t('product.name')}
+              required
+              placeholder={t('product.namePlaceholder')}
+            />
           )}
         </group.AppField>
 
         <group.AppField name='category'>
           {(field) => (
             <field.SelectField
-              label='Category'
+              label={t('product.category')}
               required
               options={categoryOptions}
-              placeholder='Select category'
+              placeholder={t('product.categoryPlaceholder')}
             />
           )}
         </group.AppField>
@@ -72,12 +78,12 @@ const Step1Group = withFieldGroup({
         <group.AppField name='price'>
           {(field) => (
             <field.TextField
-              label='Price'
+              label={t('product.price')}
               required
               type='number'
               min={0}
               step={0.01}
-              placeholder='Enter price'
+              placeholder={t('product.pricePlaceholder')}
             />
           )}
         </group.AppField>
@@ -91,17 +97,18 @@ const Step2Group = withFieldGroup({
     description: ''
   },
   render: function Step2Render({ group }) {
+    const { t } = useLanguage();
     return (
       <div className='space-y-4'>
-        <h3 className='text-lg font-semibold'>Details</h3>
+        <h3 className='text-lg font-semibold'>{t('form.multiStep.details')}</h3>
         <FieldDescription>Add a detailed product description.</FieldDescription>
 
         <group.AppField name='description'>
           {(field) => (
             <field.TextareaField
-              label='Description'
+              label={t('product.description')}
               required
-              placeholder='Enter product description'
+              placeholder={t('product.descriptionPlaceholder')}
               maxLength={500}
               rows={5}
             />
@@ -115,9 +122,10 @@ const Step2Group = withFieldGroup({
 const Step3Group = withFieldGroup({
   defaultValues: {},
   render: function Step3Render() {
+    const { t } = useLanguage();
     return (
       <div className='space-y-4'>
-        <h3 className='text-lg font-semibold'>Review & Submit</h3>
+        <h3 className='text-lg font-semibold'>{t('form.multiStep.reviewSubmit')}</h3>
         <FieldDescription>Review the details below before submitting.</FieldDescription>
       </div>
     );
@@ -171,6 +179,7 @@ type ProductFormValues = {
 };
 
 export default function MultiStepProductForm() {
+  const { t } = useLanguage();
   const {
     currentValidator,
     step,
@@ -193,7 +202,7 @@ export default function MultiStepProductForm() {
       onDynamicAsyncDebounceMs: 500
     },
     onSubmit: () => {
-      toast.success('Product created successfully!');
+      toast.success(t('product.created'));
     }
   });
 
@@ -245,7 +254,7 @@ export default function MultiStepProductForm() {
             <form.StepButton
               label={
                 <>
-                  <Icons.chevronLeft /> Previous
+                  <Icons.chevronLeft /> {t('common.previous')}
                 </>
               }
               disabled={isFirstStep}
@@ -265,10 +274,10 @@ export default function MultiStepProductForm() {
                     variant='outline'
                     size='sm'
                   >
-                    Reset
+                    {t('common.reset')}
                   </Button>
                 )}
-                <form.SubmitButton>Submit</form.SubmitButton>
+                <form.SubmitButton>{t('common.submit')}</form.SubmitButton>
               </div>
             ) : (
               <div className='flex w-full items-center justify-end gap-3 pt-3'>
@@ -280,13 +289,13 @@ export default function MultiStepProductForm() {
                     variant='outline'
                     size='sm'
                   >
-                    Reset
+                    {t('common.reset')}
                   </Button>
                 )}
                 <form.StepButton
                   label={
                     <>
-                      Next <Icons.chevronRight />
+                      {t('common.next')} <Icons.chevronRight />
                     </>
                   }
                   handleMovement={handleNext}

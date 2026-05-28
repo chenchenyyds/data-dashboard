@@ -1,15 +1,16 @@
+'use client';
+
 import PageContainer from '@/components/layout/page-container';
 import AdvancedFormPatterns from '@/features/forms/components/advanced-form-patterns';
-
-export const metadata = {
-  title: 'Dashboard: Advanced Form Patterns'
-};
+import { useLanguage } from '@/contexts/language-context';
 
 export default function Page() {
+  const { t } = useLanguage();
+
   return (
     <PageContainer
-      pageTitle='Advanced Form Patterns'
-      pageDescription='Linked fields, async validation, dynamic rows, nested objects, cross-field validation, and form-level errors.'
+      pageTitle={t('page.forms.advanced.title')}
+      pageDescription={t('page.forms.advanced.desc')}
     >
       <AdvancedFormPatterns />
     </PageContainer>

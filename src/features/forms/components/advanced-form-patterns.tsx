@@ -16,6 +16,7 @@ import { Separator } from '@/components/ui/separator';
 import { Icons } from '@/components/icons';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
+import { useLanguage } from '@/contexts/language-context';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -93,6 +94,7 @@ const advancedSchema = z.object({
 // ---------------------------------------------------------------------------
 
 export default function AdvancedFormPatterns() {
+  const { t } = useLanguage();
   const form = useAppForm({
     defaultValues: {
       username: '',
@@ -127,7 +129,7 @@ export default function AdvancedFormPatterns() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className='text-2xl font-bold'>Team Registration</CardTitle>
+        <CardTitle className='text-2xl font-bold'>{t('form.advanced.teamRegistration')}</CardTitle>
         <p className='text-muted-foreground'>
           Demonstrates async validation, linked fields, nested objects, dynamic arrays, listeners,
           form-level errors, and scroll-to-first-error.
@@ -141,7 +143,7 @@ export default function AdvancedFormPatterns() {
 
             {/* ─── Section 1: Account ─── */}
             <div className='space-y-1'>
-              <h3 className='text-lg font-semibold'>Account</h3>
+              <h3 className='text-lg font-semibold'>{t('form.advanced.account')}</h3>
               <p className='text-muted-foreground text-sm'>Async validation, linked fields</p>
             </div>
 
@@ -218,7 +220,7 @@ export default function AdvancedFormPatterns() {
 
             {/* ─── Section 2: Team Info (nested objects) ─── */}
             <div className='space-y-1'>
-              <h3 className='text-lg font-semibold'>Team Info</h3>
+              <h3 className='text-lg font-semibold'>{t('form.advanced.teamInfo')}</h3>
               <p className='text-muted-foreground text-sm'>
                 Nested objects with dot-notation paths
               </p>
@@ -252,7 +254,7 @@ export default function AdvancedFormPatterns() {
 
             {/* ─── Section 3: Members (dynamic array rows) ─── */}
             <div className='space-y-1'>
-              <h3 className='text-lg font-semibold'>Members</h3>
+              <h3 className='text-lg font-semibold'>{t('form.advanced.members')}</h3>
               <p className='text-muted-foreground text-sm'>Dynamic array rows with add / remove</p>
             </div>
 
@@ -339,7 +341,7 @@ export default function AdvancedFormPatterns() {
 
             {/* ─── Section 4: Preferences (listeners / side effects) ─── */}
             <div className='space-y-1'>
-              <h3 className='text-lg font-semibold'>Preferences</h3>
+              <h3 className='text-lg font-semibold'>{t('form.advanced.preferences')}</h3>
               <p className='text-muted-foreground text-sm'>
                 Listener side effects — country resets state
               </p>
@@ -383,9 +385,9 @@ export default function AdvancedFormPatterns() {
                 onClick={() => form.reset()}
                 className='flex-1'
               >
-                Reset
+                {t('common.reset')}
               </Button>
-              <form.SubmitButton className='flex-1'>Register Team</form.SubmitButton>
+              <form.SubmitButton className='flex-1'>{t('common.submit')}</form.SubmitButton>
             </div>
           </form.Form>
         </form.AppForm>

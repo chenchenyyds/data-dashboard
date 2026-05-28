@@ -19,12 +19,7 @@ import { toast } from 'sonner';
 import * as z from 'zod';
 import { userSchema, type UserFormValues } from '../schemas/user';
 import { ROLE_OPTIONS } from './users-table/options';
-
-const STATUS_OPTIONS = [
-  { value: 'Active', label: 'Active' },
-  { value: 'Inactive', label: 'Inactive' },
-  { value: 'Invited', label: 'Invited' }
-];
+import { useLanguage } from '@/contexts/language-context';
 
 interface UserFormSheetProps {
   user?: User;
@@ -33,25 +28,31 @@ interface UserFormSheetProps {
 }
 
 export function UserFormSheet({ user, open, onOpenChange }: UserFormSheetProps) {
+  const { t } = useLanguage();
   const isEdit = !!user;
+  const STATUS_OPTIONS = [
+    { value: 'Active', label: t('status.active') },
+    { value: 'Inactive', label: t('status.inactive') },
+    { value: 'Invited', label: t('status.invited') }
+  ];
 
   const createMutation = useMutation({
     ...createUserMutation,
     onSuccess: () => {
-      toast.success('User created successfully');
+      toast.success(t('user.created'));
       onOpenChange(false);
       form.reset();
     },
-    onError: () => toast.error('Failed to create user')
+    onError: () => toast.error(t('user.createFailed'))
   });
 
   const updateMutation = useMutation({
     ...updateUserMutation,
     onSuccess: () => {
-      toast.success('User updated successfully');
+      toast.success(t('user.updated'));
       onOpenChange(false);
     },
-    onError: () => toast.error('Failed to update user')
+    onError: () => toast.error(t('user.updateFailed'))
   });
 
   const form = useAppForm({
@@ -83,12 +84,8 @@ export function UserFormSheet({ user, open, onOpenChange }: UserFormSheetProps) 
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className='flex flex-col'>
         <SheetHeader>
-          <SheetTitle>{isEdit ? 'Edit User' : 'New User'}</SheetTitle>
-          <SheetDescription>
-            {isEdit
-              ? 'Update the user details below.'
-              : 'Fill in the details to create a new user.'}
-          </SheetDescription>
+          <SheetTitle>{isEdit ? t('user.edit') : t('user.new')}</SheetTitle>
+          <SheetDescription>{isEdit ? t('user.editDesc') : t('user.newDesc')}</SheetDescription>
         </SheetHeader>
 
         <div className='flex-1 overflow-auto'>
@@ -97,18 +94,18 @@ export function UserFormSheet({ user, open, onOpenChange }: UserFormSheetProps) 
               <div className='grid grid-cols-2 gap-4'>
                 <FormTextField
                   name='first_name'
-                  label='First Name'
+                  label={t('user.firstName')}
                   required
-                  placeholder='John'
+                  placeholder={t('user.firstNamePlaceholder')}
                   validators={{
                     onBlur: z.string().min(2, 'First name must be at least 2 characters')
                   }}
                 />
                 <FormTextField
                   name='last_name'
-                  label='Last Name'
+                  label={t('user.lastName')}
                   required
-                  placeholder='Doe'
+                  placeholder={t('user.lastNamePlaceholder')}
                   validators={{
                     onBlur: z.string().min(2, 'Last name must be at least 2 characters')
                   }}
@@ -117,10 +114,10 @@ export function UserFormSheet({ user, open, onOpenChange }: UserFormSheetProps) 
 
               <FormTextField
                 name='email'
-                label='Email'
+                label={t('user.email')}
                 required
                 type='email'
-                placeholder='john@example.com'
+                placeholder={t('user.emailPlaceholder')}
                 validators={{
                   onBlur: z.string().email('Please enter a valid email')
                 }}
@@ -128,10 +125,10 @@ export function UserFormSheet({ user, open, onOpenChange }: UserFormSheetProps) 
 
               <FormTextField
                 name='phone'
-                label='Phone'
+                label={t('user.phone')}
                 required
                 type='tel'
-                placeholder='(555) 123-4567'
+                placeholder={t('user.phonePlaceholder')}
                 validators={{
                   onBlur: z.string().min(1, 'Phone number is required')
                 }}
@@ -139,10 +136,10 @@ export function UserFormSheet({ user, open, onOpenChange }: UserFormSheetProps) 
 
               <FormSelectField
                 name='role'
-                label='Role'
+                label={t('user.role')}
                 required
                 options={ROLE_OPTIONS}
-                placeholder='Select role'
+                placeholder={t('user.rolePlaceholder')}
                 validators={{
                   onBlur: z.string().min(1, 'Please select a role')
                 }}
@@ -150,10 +147,10 @@ export function UserFormSheet({ user, open, onOpenChange }: UserFormSheetProps) 
 
               <FormSelectField
                 name='status'
-                label='Status'
+                label={t('user.status')}
                 required
                 options={STATUS_OPTIONS}
-                placeholder='Select status'
+                placeholder={t('user.statusPlaceholder')}
                 validators={{
                   onBlur: z.string().min(1, 'Please select a status')
                 }}
@@ -164,10 +161,10 @@ export function UserFormSheet({ user, open, onOpenChange }: UserFormSheetProps) 
 
         <SheetFooter>
           <Button type='button' variant='outline' onClick={() => onOpenChange(false)}>
-            Cancel
+            {t('common.cancel')}
           </Button>
           <Button type='submit' form='user-form-sheet' isLoading={isPending}>
-            <Icons.check /> {isEdit ? 'Update User' : 'Create User'}
+            <Icons.check /> {isEdit ? t('user.updateUser') : t('user.createUser')}
           </Button>
         </SheetFooter>
       </SheetContent>
@@ -176,12 +173,13 @@ export function UserFormSheet({ user, open, onOpenChange }: UserFormSheetProps) 
 }
 
 export function UserFormSheetTrigger() {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
 
   return (
     <>
       <Button onClick={() => setOpen(true)}>
-        <Icons.add className='mr-2 h-4 w-4' /> Add User
+        <Icons.add className='mr-2 h-4 w-4' /> {t('user.add')}
       </Button>
       <UserFormSheet open={open} onOpenChange={setOpen} />
     </>

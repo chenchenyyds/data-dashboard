@@ -1,3 +1,5 @@
+'use client';
+
 import { type Table as TanstackTable, flexRender } from '@tanstack/react-table';
 import type * as React from 'react';
 
@@ -12,6 +14,7 @@ import {
 } from '@/components/ui/table';
 import { getCommonPinningStyles } from '@/lib/data-table';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { useLanguage } from '@/contexts/language-context';
 
 interface DataTableProps<TData> extends React.ComponentProps<'div'> {
   table: TanstackTable<TData>;
@@ -19,6 +22,7 @@ interface DataTableProps<TData> extends React.ComponentProps<'div'> {
 }
 
 export function DataTable<TData>({ table, actionBar, children }: DataTableProps<TData>) {
+  const { t } = useLanguage();
   return (
     <div className='flex flex-1 flex-col space-y-4'>
       {children}
@@ -64,7 +68,7 @@ export function DataTable<TData>({ table, actionBar, children }: DataTableProps<
                 ) : (
                   <TableRow>
                     <TableCell colSpan={table.getAllColumns().length} className='h-24 text-center'>
-                      No results.
+                      {t('table.noResults')}
                     </TableCell>
                   </TableRow>
                 )}

@@ -6,9 +6,11 @@ import { useMemo } from 'react';
 import RenderResults from './render-result';
 import useThemeSwitching from './use-theme-switching';
 import { useFilteredNavGroups } from '@/hooks/use-nav';
+import { useLanguage } from '@/contexts/language-context';
 
 export default function KBar({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const { t } = useLanguage();
   const filteredGroups = useFilteredNavGroups(navGroups);
 
   // These action are for the navigation
@@ -21,36 +23,40 @@ export default function KBar({ children }: { children: React.ReactNode }) {
     const allItems = filteredGroups.flatMap((group) => group.items);
 
     return allItems.flatMap((navItem) => {
+      const itemName = t(navItem.translationKey || navItem.title);
       // Only include base action if the navItem has a real URL and is not just a container
       const baseAction =
         navItem.url !== '#'
           ? {
               id: `${navItem.title.toLowerCase()}Action`,
-              name: navItem.title,
+              name: itemName,
               shortcut: navItem.shortcut,
-              keywords: navItem.title.toLowerCase(),
+              keywords: itemName.toLowerCase(),
               section: 'Navigation',
-              subtitle: `Go to ${navItem.title}`,
+              subtitle: `Go to ${itemName}`,
               perform: () => navigateTo(navItem.url)
             }
           : null;
 
       // Map child items into actions
       const childActions =
-        navItem.items?.map((childItem) => ({
-          id: `${childItem.title.toLowerCase()}Action`,
-          name: childItem.title,
-          shortcut: childItem.shortcut,
-          keywords: childItem.title.toLowerCase(),
-          section: navItem.title,
-          subtitle: `Go to ${childItem.title}`,
-          perform: () => navigateTo(childItem.url)
-        })) ?? [];
+        navItem.items?.map((childItem) => {
+          const childName = t(childItem.translationKey || childItem.title);
+          return {
+            id: `${childItem.title.toLowerCase()}Action`,
+            name: childName,
+            shortcut: childItem.shortcut,
+            keywords: childName.toLowerCase(),
+            section: itemName,
+            subtitle: `Go to ${childName}`,
+            perform: () => navigateTo(childItem.url)
+          };
+        }) ?? [];
 
       // Return only valid actions (ignoring null base actions for containers)
       return baseAction ? [baseAction, ...childActions] : childActions;
     });
-  }, [router, filteredGroups]);
+  }, [router, filteredGroups, t]);
 
   return (
     <KBarProvider actions={actions}>

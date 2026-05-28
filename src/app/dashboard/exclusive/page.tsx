@@ -6,12 +6,18 @@ import { useOrganization, Show } from '@clerk/nextjs';
 import { Icons } from '@/components/icons';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import Link from 'next/link';
+import { useLanguage } from '@/contexts/language-context';
 
 export default function ExclusivePage() {
+  const { t } = useLanguage();
   const { organization, isLoaded } = useOrganization();
 
   return (
-    <PageContainer isLoading={!isLoaded}>
+    <PageContainer
+      isLoading={!isLoaded}
+      pageTitle={t('page.exclusive.title')}
+      pageDescription={t('page.exclusive.desc')}
+    >
       <Show
         when={{ plan: 'pro' }}
         fallback={
@@ -19,14 +25,13 @@ export default function ExclusivePage() {
             <Alert>
               <Icons.lock className='h-5 w-5 text-yellow-600' />
               <AlertDescription>
-                <div className='mb-1 text-lg font-semibold'>Pro Plan Required</div>
+                <div className='mb-1 text-lg font-semibold'>{t('exclusive.proRequired')}</div>
                 <div className='text-muted-foreground'>
-                  This page is only available to organizations on the{' '}
-                  <span className='font-semibold'>Pro</span> plan.
+                  {t('exclusive.proRequiredDesc')}
                   <br />
-                  Upgrade your subscription in&nbsp;
+                  {t('exclusive.upgrade')}&nbsp;
                   <Link className='underline' href='/dashboard/billing'>
-                    Billing &amp; Plans
+                    {t('nav.billing')} &amp; {t('user.settings')}
                   </Link>
                   .
                 </div>
@@ -39,19 +44,16 @@ export default function ExclusivePage() {
           <div>
             <h1 className='flex items-center gap-2 text-3xl font-bold tracking-tight'>
               <Icons.badgeCheck className='h-7 w-7 text-green-600' />
-              Exclusive Area
+              {t('page.exclusive.title')}
             </h1>
             <p className='text-muted-foreground'>
-              Welcome, <span className='font-semibold'>{organization?.name}</span>! This page
-              contains exclusive features for Pro plan organizations.
+              {t('exclusive.welcome')} <span className='font-semibold'>{organization?.name}</span>!
             </p>
           </div>
           <Card>
             <CardHeader>
-              <CardTitle>Thank You for Checking Out the Exclusive Page</CardTitle>
-              <CardDescription>
-                This means you belong to an organization subscribed to the Pro plan.
-              </CardDescription>
+              <CardTitle>{t('exclusive.thankYou')}</CardTitle>
+              <CardDescription>{t('page.exclusive.desc')}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className='text-lg'>Have a wonderful day!</div>

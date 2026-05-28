@@ -29,21 +29,21 @@ const allChartData = [
   { month: 'December', desktop: 278, mobile: 205 }
 ];
 
-const chartConfig = {
-  desktop: {
-    label: 'Desktop',
-    color: 'var(--chart-1)'
-  },
-  mobile: {
-    label: 'Mobile',
-    color: 'var(--chart-2)'
-  }
-} satisfies ChartConfig;
-
 export function BarGraph() {
   const { preset } = useDateRange();
   const { t } = useLanguage();
   const chartData = filterDataByRange(allChartData, preset);
+
+  const chartConfig = {
+    desktop: {
+      label: t('overview.chart.desktop'),
+      color: 'var(--chart-1)'
+    },
+    mobile: {
+      label: t('overview.chart.mobile'),
+      color: 'var(--chart-2)'
+    }
+  } satisfies ChartConfig;
 
   return (
     <Card>

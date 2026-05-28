@@ -20,6 +20,7 @@ import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import * as React from 'react';
 import { CheckIcon } from '@radix-ui/react-icons';
+import { useLanguage } from '@/contexts/language-context';
 
 interface DataTableFacetedFilterProps<TData, TValue> {
   column?: Column<TData, TValue>;
@@ -35,6 +36,7 @@ export function DataTableFacetedFilter<TData, TValue>({
   multiple
 }: DataTableFacetedFilterProps<TData, TValue>) {
   const [open, setOpen] = React.useState(false);
+  const { t } = useLanguage();
 
   const columnFilterValue = column?.getFilterValue();
   const selectedValues = React.useMemo(
@@ -100,7 +102,7 @@ export function DataTableFacetedFilter<TData, TValue>({
               <div className='hidden items-center gap-1 lg:flex'>
                 {selectedValues.size > 2 ? (
                   <Badge variant='secondary' className='rounded-sm px-1 font-normal'>
-                    {selectedValues.size} selected
+                    {t('table.selected', { size: selectedValues.size })}
                   </Badge>
                 ) : (
                   options
@@ -124,7 +126,7 @@ export function DataTableFacetedFilter<TData, TValue>({
         <Command>
           <CommandInput placeholder={title} />
           <CommandList className='max-h-full'>
-            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandEmpty>{t('table.noResultsFound')}</CommandEmpty>
             <CommandGroup className='max-h-[18.75rem] overflow-x-hidden overflow-y-auto'>
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.value);
@@ -153,7 +155,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                 <CommandSeparator />
                 <CommandGroup>
                   <CommandItem onSelect={() => onReset()} className='justify-center text-center'>
-                    Clear filters
+                    {t('table.clearFilters')}
                   </CommandItem>
                 </CommandGroup>
               </>

@@ -6,12 +6,14 @@ import { useTransition } from 'react';
 import { toast } from 'sonner';
 import * as z from 'zod';
 import GithubSignInButton from './github-auth-button';
+import { useLanguage } from '@/contexts/language-context';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Enter a valid email address' })
 });
 
 export default function UserAuthForm() {
+  const { t } = useLanguage();
   const [loading, startTransition] = useTransition();
 
   const form = useAppForm({
@@ -37,14 +39,14 @@ export default function UserAuthForm() {
             children={(field) => (
               <field.FieldSet>
                 <field.Field>
-                  <field.FieldLabel htmlFor={field.name}>Email</field.FieldLabel>
+                  <field.FieldLabel htmlFor={field.name}>{t('auth.email')}</field.FieldLabel>
                   <Input
                     id={field.name}
                     name={field.name}
                     value={field.state.value}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
-                    placeholder='Enter your email...'
+                    placeholder={t('auth.emailPlaceholder')}
                     disabled={loading}
                     aria-invalid={field.state.meta.isTouched && !field.state.meta.isValid}
                   />
@@ -54,7 +56,7 @@ export default function UserAuthForm() {
             )}
           />
           <Button disabled={loading} className='mt-2 ml-auto w-full' type='submit'>
-            Continue With Email
+            {t('auth.continueWithEmail')}
           </Button>
         </form.Form>
       </form.AppForm>
@@ -63,7 +65,9 @@ export default function UserAuthForm() {
           <span className='w-full border-t' />
         </div>
         <div className='relative flex justify-center text-xs uppercase'>
-          <span className='bg-background text-muted-foreground px-2'>Or continue with</span>
+          <span className='bg-background text-muted-foreground px-2'>
+            {t('auth.orContinueWith')}
+          </span>
         </div>
       </div>
       <GithubSignInButton />

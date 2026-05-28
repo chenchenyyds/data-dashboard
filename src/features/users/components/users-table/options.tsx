@@ -1,3 +1,4 @@
+// TODO: Translate role labels using useLanguage() at consumption point
 export const ROLE_OPTIONS = [
   { value: 'Developer', label: 'Developer' },
   { value: 'Designer', label: 'Designer' },

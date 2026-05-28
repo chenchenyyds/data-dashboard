@@ -11,6 +11,7 @@ import { Separator } from '@/components/ui/separator';
 import { Slider } from '@/components/ui/slider';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
+import { useLanguage } from '@/contexts/language-context';
 
 interface Range {
   min: number;
@@ -34,6 +35,7 @@ interface DataTableSliderFilterProps<TData> {
 }
 
 export function DataTableSliderFilter<TData>({ column, title }: DataTableSliderFilterProps<TData>) {
+  const { t } = useLanguage();
   const id = React.useId();
 
   const columnFilterValue = getIsValidRange(column.getFilterValue())
@@ -125,7 +127,7 @@ export function DataTableSliderFilter<TData>({ column, title }: DataTableSliderF
           {columnFilterValue ? (
             <button
               type='button'
-              aria-label={`Clear ${title} filter`}
+              aria-label={t('table.clearFilters')}
               className='focus-visible:ring-ring rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:ring-1 focus-visible:outline-none'
               onClick={onReset}
             >
@@ -154,7 +156,7 @@ export function DataTableSliderFilter<TData>({ column, title }: DataTableSliderF
           </p>
           <div className='flex items-center gap-4'>
             <Label htmlFor={`${id}-from`} className='sr-only'>
-              From
+              {t('common.from')}
             </Label>
             <div className='relative'>
               <Input
@@ -178,7 +180,7 @@ export function DataTableSliderFilter<TData>({ column, title }: DataTableSliderF
               )}
             </div>
             <Label htmlFor={`${id}-to`} className='sr-only'>
-              to
+              {t('common.to')}
             </Label>
             <div className='relative'>
               <Input
@@ -214,8 +216,8 @@ export function DataTableSliderFilter<TData>({ column, title }: DataTableSliderF
             onValueChange={onSliderValueChange}
           />
         </div>
-        <Button aria-label={`Clear ${title} filter`} variant='outline' size='sm' onClick={onReset}>
-          Clear
+        <Button aria-label={t('table.clear')} variant='outline' size='sm' onClick={onReset}>
+          {t('table.clear')}
         </Button>
       </PopoverContent>
     </Popover>

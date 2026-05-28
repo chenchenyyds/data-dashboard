@@ -1,3 +1,4 @@
+// TODO: Translate category labels using useLanguage() at consumption point
 export const categoryOptions = [
   { value: 'beauty', label: 'Beauty Products' },
   { value: 'electronics', label: 'Electronics' },

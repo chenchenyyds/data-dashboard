@@ -58,7 +58,11 @@ export default function AppSidebar() {
       <SidebarContent className='overflow-x-hidden'>
         {filteredGroups.map((group) => (
           <SidebarGroup key={group.label || 'ungrouped'} className='py-0'>
-            {group.label && <SidebarGroupLabel>{group.label}</SidebarGroupLabel>}
+            {group.label && (
+              <SidebarGroupLabel>
+                {t(`nav.group.${group.label.toLowerCase()}`) || group.label}
+              </SidebarGroupLabel>
+            )}
             <SidebarMenu>
               {group.items.map((item) => {
                 const Icon = item.icon ? Icons[item.icon] : Icons.logo;
@@ -71,9 +75,12 @@ export default function AppSidebar() {
                   >
                     <SidebarMenuItem>
                       <CollapsibleTrigger asChild>
-                        <SidebarMenuButton tooltip={item.title} isActive={pathname === item.url}>
+                        <SidebarMenuButton
+                          tooltip={t(item.translationKey || item.title)}
+                          isActive={pathname === item.url}
+                        >
                           {item.icon && <Icon />}
-                          <span>{item.title}</span>
+                          <span>{t(item.translationKey || item.title)}</span>
                           <Icons.chevronRight className='ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90' />
                         </SidebarMenuButton>
                       </CollapsibleTrigger>
@@ -83,7 +90,7 @@ export default function AppSidebar() {
                             <SidebarMenuSubItem key={subItem.title}>
                               <SidebarMenuSubButton asChild isActive={pathname === subItem.url}>
                                 <Link href={subItem.url}>
-                                  <span>{subItem.title}</span>
+                                  <span>{t(subItem.translationKey || subItem.title)}</span>
                                 </Link>
                               </SidebarMenuSubButton>
                             </SidebarMenuSubItem>
@@ -96,12 +103,12 @@ export default function AppSidebar() {
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton
                       asChild
-                      tooltip={item.title}
+                      tooltip={t(item.translationKey || item.title)}
                       isActive={pathname === item.url}
                     >
                       <Link href={item.url}>
                         <Icon />
-                        <span>{item.title}</span>
+                        <span>{t(item.translationKey || item.title)}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

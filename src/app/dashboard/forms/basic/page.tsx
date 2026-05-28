@@ -1,15 +1,16 @@
+'use client';
+
 import PageContainer from '@/components/layout/page-container';
 import DemoForm from '@/components/forms/demo-form';
-
-export const metadata = {
-  title: 'Dashboard: Basic Form'
-};
+import { useLanguage } from '@/contexts/language-context';
 
 export default function Page() {
+  const { t } = useLanguage();
+
   return (
     <PageContainer
-      pageTitle='Basic Form'
-      pageDescription='A comprehensive form demo with all field types.'
+      pageTitle={t('page.forms.basic.title')}
+      pageDescription={t('page.forms.basic.desc')}
     >
       <DemoForm />
     </PageContainer>

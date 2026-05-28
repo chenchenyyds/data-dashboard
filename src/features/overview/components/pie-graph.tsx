@@ -21,34 +21,35 @@ const chartData = [
   { browser: 'other', visitors: 90, fill: 'var(--color-other)' }
 ];
 
-const chartConfig = {
-  visitors: {
-    label: 'Visitors'
-  },
-  chrome: {
-    label: 'Chrome',
-    color: 'var(--chart-1)'
-  },
-  safari: {
-    label: 'Safari',
-    color: 'var(--chart-2)'
-  },
-  firefox: {
-    label: 'Firefox',
-    color: 'var(--chart-3)'
-  },
-  edge: {
-    label: 'Edge',
-    color: 'var(--chart-4)'
-  },
-  other: {
-    label: 'Other',
-    color: 'var(--chart-5)'
-  }
-} satisfies ChartConfig;
-
 export function PieGraph() {
   const { t } = useLanguage();
+
+  const chartConfig = {
+    visitors: {
+      label: 'Visitors'
+    },
+    chrome: {
+      label: t('overview.chart.chrome'),
+      color: 'var(--chart-1)'
+    },
+    safari: {
+      label: t('overview.chart.safari'),
+      color: 'var(--chart-2)'
+    },
+    firefox: {
+      label: t('overview.chart.firefox'),
+      color: 'var(--chart-3)'
+    },
+    edge: {
+      label: t('overview.chart.edge'),
+      color: 'var(--chart-4)'
+    },
+    other: {
+      label: t('overview.chart.other'),
+      color: 'var(--chart-5)'
+    }
+  } satisfies ChartConfig;
+
   return (
     <Card className='flex h-full flex-col'>
       <CardHeader className='items-center pb-0'>

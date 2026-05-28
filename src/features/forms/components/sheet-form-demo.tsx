@@ -25,6 +25,7 @@ import {
 } from '@/components/ui/dialog';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Icons } from '@/components/icons';
+import { useLanguage } from '@/contexts/language-context';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -58,6 +59,7 @@ const categoryOptions = [
 // ---------------------------------------------------------------------------
 
 function SheetFormSection() {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
 
   const form = useAppForm({
@@ -68,7 +70,7 @@ function SheetFormSection() {
       description: ''
     } as SheetFormValues,
     onSubmit: ({ value }) => {
-      toast.success('Product created successfully!', {
+      toast.success(t('product.created'), {
         description: `${value.name} has been added.`
       });
       setOpen(false);
@@ -81,7 +83,7 @@ function SheetFormSection() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Sheet Form</CardTitle>
+        <CardTitle>{t('form.sheet.sheetForm')}</CardTitle>
         <CardDescription>
           A product creation form inside a Sheet. The submit button lives in the SheetFooter,
           outside the form element, connected via the HTML{' '}
@@ -93,7 +95,7 @@ function SheetFormSection() {
           <SheetTrigger asChild>
             <Button>
               <Icons.add className='mr-2 h-4 w-4' />
-              Add Product
+              {t('product.addProduct')}
             </Button>
           </SheetTrigger>
           <SheetContent className='flex flex-col'>
@@ -108,9 +110,9 @@ function SheetFormSection() {
               <form.Form id='sheet-form-id' className='space-y-4 p-0 md:p-0'>
                 <FormTextField
                   name='name'
-                  label='Product Name'
+                  label={t('product.name')}
                   required
-                  placeholder='Enter product name'
+                  placeholder={t('product.namePlaceholder')}
                   validators={{
                     onBlur: z.string().min(2, 'Product name must be at least 2 characters')
                   }}
@@ -118,10 +120,10 @@ function SheetFormSection() {
 
                 <FormSelectField
                   name='category'
-                  label='Category'
+                  label={t('product.category')}
                   required
                   options={categoryOptions}
-                  placeholder='Select a category'
+                  placeholder={t('product.categoryPlaceholder')}
                   validators={{
                     onBlur: z.string().min(1, 'Please select a category')
                   }}
@@ -129,7 +131,7 @@ function SheetFormSection() {
 
                 <FormTextField
                   name='price'
-                  label='Price'
+                  label={t('product.price')}
                   required
                   type='number'
                   min={0}
@@ -142,9 +144,9 @@ function SheetFormSection() {
 
                 <FormTextareaField
                   name='description'
-                  label='Description'
+                  label={t('product.description')}
                   required
-                  placeholder='Enter product description'
+                  placeholder={t('product.descriptionPlaceholder')}
                   maxLength={500}
                   rows={4}
                   validators={{
@@ -156,10 +158,10 @@ function SheetFormSection() {
 
             <SheetFooter className='pt-4'>
               <Button type='button' variant='outline' onClick={() => setOpen(false)}>
-                Cancel
+                {t('common.cancel')}
               </Button>
               <Button type='submit' form='sheet-form-id'>
-                Create Product
+                {t('product.addProduct')}
               </Button>
             </SheetFooter>
           </SheetContent>
@@ -174,6 +176,7 @@ function SheetFormSection() {
 // ---------------------------------------------------------------------------
 
 function DialogFormSection() {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
 
   const form = useAppForm({
@@ -195,7 +198,7 @@ function DialogFormSection() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Dialog Form</CardTitle>
+        <CardTitle>{t('form.sheet.dialogForm')}</CardTitle>
         <CardDescription>
           A quick feedback form inside a Dialog. Uses composed field components from{' '}
           <code className='bg-muted rounded px-1 text-sm'>useFormFields</code> with the submit
@@ -243,10 +246,10 @@ function DialogFormSection() {
 
             <DialogFooter>
               <Button type='button' variant='outline' onClick={() => setOpen(false)}>
-                Cancel
+                {t('common.cancel')}
               </Button>
               <Button type='submit' form='dialog-form-id'>
-                Submit Feedback
+                {t('common.submit')}
               </Button>
             </DialogFooter>
           </DialogContent>
@@ -261,10 +264,11 @@ function DialogFormSection() {
 // ---------------------------------------------------------------------------
 
 function ToastDemoSection() {
+  const { t } = useLanguage();
   return (
     <Card className='md:col-span-2'>
       <CardHeader>
-        <CardTitle>Toast Notifications</CardTitle>
+        <CardTitle>{t('form.sheet.toastNotifications')}</CardTitle>
         <CardDescription>
           Trigger different toast variants to preview notification styles.
         </CardDescription>
@@ -293,7 +297,7 @@ function ToastDemoSection() {
           variant='outline'
           onClick={() =>
             toast.promise(new Promise((resolve) => setTimeout(resolve, 2000)), {
-              loading: 'Loading...',
+              loading: t('common.loading'),
               success: 'Data loaded!',
               error: 'Failed to load.'
             })

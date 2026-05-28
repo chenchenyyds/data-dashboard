@@ -33,6 +33,7 @@ import { format } from 'date-fns';
 import type { DateRange } from 'react-day-picker';
 import { Icons } from '@/components/icons';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/contexts/language-context';
 
 // Schema (form-level safety net — onSubmit catches anything field-level missed)
 const demoFormSchema = z.object({
@@ -255,6 +256,7 @@ type DemoFormValues = {
 };
 
 export default function DemoForm() {
+  const { t } = useLanguage();
   const form = useAppForm({
     defaultValues: {
       name: '',
@@ -305,7 +307,7 @@ export default function DemoForm() {
     <div className='grid grid-cols-1 gap-6 xl:grid-cols-[1fr_320px]'>
       <Card>
         <CardHeader>
-          <CardTitle className='text-2xl font-bold'>All Form Inputs Demo</CardTitle>
+          <CardTitle className='text-2xl font-bold'>{t('form.demo.title')}</CardTitle>
           <p className='text-muted-foreground'>
             Every possible form input — built with TanStack Form + shadcn/ui
           </p>
@@ -314,7 +316,7 @@ export default function DemoForm() {
           <form.AppForm>
             <form.Form className='space-y-6'>
               {/* ─── TEXT INPUTS (flat pattern + field-level onBlur validation) ─── */}
-              <SectionTitle>Text Inputs</SectionTitle>
+              <SectionTitle>{t('form.demo.textInputs')}</SectionTitle>
 
               <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                 <FormTextField
@@ -401,7 +403,7 @@ export default function DemoForm() {
               />
 
               {/* ─── SELECT & COMBOBOX ─── */}
-              <SectionTitle>Select & Combobox</SectionTitle>
+              <SectionTitle>{t('form.demo.selectCombobox')}</SectionTitle>
 
               <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                 {/* Listener: logs country changes (replace with dependent field reset) */}
@@ -448,7 +450,7 @@ export default function DemoForm() {
               </div>
 
               {/* ─── CHECKBOX & RADIO ─── */}
-              <SectionTitle>Checkbox & Radio</SectionTitle>
+              <SectionTitle>{t('form.demo.checkboxRadio')}</SectionTitle>
 
               {/* Checkbox Group — array mode, needs AppField */}
               <form.AppField
@@ -506,7 +508,7 @@ export default function DemoForm() {
               />
 
               {/* ─── TOGGLE & SWITCH ─── */}
-              <SectionTitle>Toggle & Switch</SectionTitle>
+              <SectionTitle>{t('form.demo.toggleSwitch')}</SectionTitle>
 
               {/* Switch (flat pattern) */}
               <FormSwitchField
@@ -571,7 +573,7 @@ export default function DemoForm() {
               />
 
               {/* ─── SLIDER (flat pattern) ─── */}
-              <SectionTitle>Slider</SectionTitle>
+              <SectionTitle>{t('form.demo.slider')}</SectionTitle>
 
               <FormSliderField
                 name='rating'
@@ -583,7 +585,7 @@ export default function DemoForm() {
               />
 
               {/* ─── DATE & TIME (custom, need AppField) ─── */}
-              <SectionTitle>Date & Time</SectionTitle>
+              <SectionTitle>{t('form.demo.dateTime')}</SectionTitle>
 
               <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                 {/* Date Picker */}
@@ -695,7 +697,7 @@ export default function DemoForm() {
               />
 
               {/* ─── SPECIAL INPUTS (custom, need AppField) ─── */}
-              <SectionTitle>Special Inputs</SectionTitle>
+              <SectionTitle>{t('form.demo.specialInputs')}</SectionTitle>
 
               <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                 {/* OTP Input */}
@@ -782,7 +784,7 @@ export default function DemoForm() {
               />
 
               {/* ─── FILE UPLOAD (flat pattern) ─── */}
-              <SectionTitle>File Upload</SectionTitle>
+              <SectionTitle>{t('form.demo.fileUpload')}</SectionTitle>
 
               <FormFileUploadField
                 name='avatar'
@@ -801,9 +803,11 @@ export default function DemoForm() {
                   onClick={() => form.reset()}
                   className='flex-1'
                 >
-                  Reset
+                  {t('common.reset')}
                 </Button>
-                <form.SubmitButton className='flex-1'>Submit Form</form.SubmitButton>
+                <form.SubmitButton className='flex-1'>
+                  {t('form.demo.submitForm')}
+                </form.SubmitButton>
               </div>
             </form.Form>
           </form.AppForm>
@@ -814,7 +818,7 @@ export default function DemoForm() {
       <div className='xl:sticky xl:top-16 xl:self-start'>
         <Card>
           <CardHeader>
-            <CardTitle>Form Data Preview</CardTitle>
+            <CardTitle>{t('form.demo.formDataPreview')}</CardTitle>
           </CardHeader>
           <CardContent>
             <pre className='bg-muted max-h-[calc(100vh-8rem)] overflow-auto rounded-lg p-4 text-xs'>

@@ -11,6 +11,7 @@ import { toast } from 'sonner';
 import * as z from 'zod';
 import { productSchema, type ProductFormValues } from '@/features/products/schemas/product';
 import { categoryOptions } from '@/features/products/constants/product-options';
+import { useLanguage } from '@/contexts/language-context';
 
 export default function ProductForm({
   initialData,
@@ -19,28 +20,29 @@ export default function ProductForm({
   initialData: Product | null;
   pageTitle: string;
 }) {
+  const { t } = useLanguage();
   const router = useRouter();
   const isEdit = !!initialData;
 
   const createMutation = useMutation({
     ...createProductMutation,
     onSuccess: () => {
-      toast.success('Product created successfully');
+      toast.success(t('product.created'));
       router.push('/dashboard/product');
     },
     onError: () => {
-      toast.error('Failed to create product');
+      toast.error(t('product.createFailed'));
     }
   });
 
   const updateMutation = useMutation({
     ...updateProductMutation,
     onSuccess: () => {
-      toast.success('Product updated successfully');
+      toast.success(t('product.updated'));
       router.push('/dashboard/product');
     },
     onError: () => {
-      toast.error('Failed to update product');
+      toast.error(t('product.updateFailed'));
     }
   });
 
@@ -84,8 +86,8 @@ export default function ProductForm({
           <form.Form className='space-y-8'>
             <FormFileUploadField
               name='image'
-              label='Product Image'
-              description='Upload a product image'
+              label={t('product.image')}
+              description={t('product.imageDesc')}
               maxSize={5 * 1024 * 1024}
               maxFiles={4}
             />
@@ -93,9 +95,9 @@ export default function ProductForm({
             <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
               <FormTextField
                 name='name'
-                label='Product Name'
+                label={t('product.name')}
                 required
-                placeholder='Enter product name'
+                placeholder={t('product.namePlaceholder')}
                 validators={{
                   onBlur: z.string().min(2, 'Product name must be at least 2 characters.')
                 }}
@@ -103,10 +105,10 @@ export default function ProductForm({
 
               <FormSelectField
                 name='category'
-                label='Category'
+                label={t('product.category')}
                 required
                 options={categoryOptions}
-                placeholder='Select category'
+                placeholder={t('product.categoryPlaceholder')}
                 validators={{
                   onBlur: z.string().min(1, 'Please select a category')
                 }}
@@ -114,12 +116,12 @@ export default function ProductForm({
 
               <FormTextField
                 name='price'
-                label='Price'
+                label={t('product.price')}
                 required
                 type='number'
                 min={0}
                 step={0.01}
-                placeholder='Enter price'
+                placeholder={t('product.pricePlaceholder')}
                 validators={{
                   onBlur: z.number({ message: 'Price is required' })
                 }}
@@ -128,9 +130,9 @@ export default function ProductForm({
 
             <FormTextareaField
               name='description'
-              label='Description'
+              label={t('product.description')}
               required
-              placeholder='Enter product description'
+              placeholder={t('product.descriptionPlaceholder')}
               maxLength={500}
               rows={4}
               validators={{
@@ -140,9 +142,11 @@ export default function ProductForm({
 
             <div className='flex justify-end gap-2'>
               <Button type='button' variant='outline' onClick={() => router.back()}>
-                Back
+                {t('product.back')}
               </Button>
-              <form.SubmitButton>{isEdit ? 'Update Product' : 'Add Product'}</form.SubmitButton>
+              <form.SubmitButton>
+                {isEdit ? t('product.update') : t('product.addProduct')}
+              </form.SubmitButton>
             </div>
           </form.Form>
         </form.AppForm>

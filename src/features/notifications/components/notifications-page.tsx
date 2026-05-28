@@ -7,6 +7,7 @@ import { NotificationCard } from '@/components/ui/notification-card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useRouter } from 'next/navigation';
 import { useNotificationStore } from '../utils/store';
+import { useLanguage } from '@/contexts/language-context';
 
 const actionRoutes: Record<string, string> = {
   view: '/dashboard/workspaces',
@@ -17,6 +18,7 @@ const actionRoutes: Record<string, string> = {
 };
 
 export default function NotificationsPage() {
+  const { t } = useLanguage();
   const { notifications, markAsRead, markAllAsRead, unreadCount } = useNotificationStore();
   const router = useRouter();
   const count = unreadCount();
@@ -29,7 +31,7 @@ export default function NotificationsPage() {
       return (
         <div className='flex flex-col items-center justify-center py-16'>
           <Icons.notification className='text-muted-foreground/40 mb-3 h-10 w-10' />
-          <p className='text-muted-foreground text-sm'>No notifications</p>
+          <p className='text-muted-foreground text-sm'>{t('notifications.empty')}</p>
         </div>
       );
     }
@@ -61,21 +63,27 @@ export default function NotificationsPage() {
 
   return (
     <PageContainer
-      pageTitle='Notifications'
-      pageDescription='View and manage all your notifications.'
+      pageTitle={t('page.notifications.title')}
+      pageDescription={t('page.notifications.desc')}
       pageHeaderAction={
         count > 0 ? (
           <Button variant='outline' size='sm' onClick={markAllAsRead}>
-            Mark all as read
+            {t('notifications.markAllRead')}
           </Button>
         ) : undefined
       }
     >
       <Tabs defaultValue='all'>
         <TabsList>
-          <TabsTrigger value='all'>All ({notifications.length})</TabsTrigger>
-          <TabsTrigger value='unread'>Unread ({unreadNotifications.length})</TabsTrigger>
-          <TabsTrigger value='read'>Read ({readNotifications.length})</TabsTrigger>
+          <TabsTrigger value='all'>
+            {t('notifications.tabAll')} ({notifications.length})
+          </TabsTrigger>
+          <TabsTrigger value='unread'>
+            {t('notifications.tabUnread')} ({unreadNotifications.length})
+          </TabsTrigger>
+          <TabsTrigger value='read'>
+            {t('notifications.tabRead')} ({readNotifications.length})
+          </TabsTrigger>
         </TabsList>
         <TabsContent value='all' className='mt-4'>
           {renderList(notifications)}

@@ -6,24 +6,19 @@ import { Button } from '@/components/ui/button';
 import { KanbanColumn, KanbanColumnHandle } from '@/components/ui/kanban';
 import type { Task } from '../utils/store';
 import { TaskCard } from './task-card';
-
-const COLUMN_TITLES: Record<string, string> = {
-  backlog: 'Backlog',
-  inProgress: 'In Progress',
-  review: 'Review',
-  done: 'Done'
-};
+import { useLanguage } from '@/contexts/language-context';
 
 interface TaskColumnProps extends Omit<React.ComponentProps<typeof KanbanColumn>, 'children'> {
   tasks: Task[];
 }
 
 export function TaskColumn({ value, tasks, ...props }: TaskColumnProps) {
+  const { t } = useLanguage();
   return (
     <KanbanColumn value={value} className='w-full shrink-0 md:w-[320px]' {...props}>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
-          <span className='text-sm font-semibold'>{COLUMN_TITLES[value] ?? value}</span>
+          <span className='text-sm font-semibold'>{t('kanban.' + value)}</span>
           <Badge variant='secondary' className='pointer-events-none rounded-sm'>
             {tasks.length}
           </Badge>

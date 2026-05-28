@@ -1,18 +1,16 @@
+'use client';
+
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { SignUp as ClerkSignUpForm } from '@clerk/nextjs';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { Icons } from '@/components/icons';
-import { Metadata } from 'next';
 import Link from 'next/link';
 import { InteractiveGridPattern } from './interactive-grid';
-
-export const metadata: Metadata = {
-  title: 'Authentication',
-  description: 'Authentication forms built using the components.'
-};
+import { useLanguage } from '@/contexts/language-context';
 
 export default function SignUpViewPage({ stars }: { stars: number }) {
+  const { t } = useLanguage();
   return (
     <div className='relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0'>
       <Link
@@ -22,7 +20,7 @@ export default function SignUpViewPage({ stars }: { stars: number }) {
           'absolute top-4 right-4 hidden md:top-8 md:right-8'
         )}
       >
-        Sign Up
+        {t('auth.signUp')}
       </Link>
       <div className='relative hidden h-full flex-col p-10 lg:flex dark:border-r'>
         <div className='absolute inset-0 bg-sidebar' />
@@ -67,7 +65,7 @@ export default function SignUpViewPage({ stars }: { stars: number }) {
           >
             <div className='flex items-center'>
               <GitHubLogoIcon className='size-4' />
-              <span className='ml-1 inline'>Star on GitHub</span>{' '}
+              <span className='ml-1 inline'>{t('auth.starOnGitHub')}</span>{' '}
             </div>
             <div className='ml-2 flex items-center gap-1 text-sm md:flex'>
               <Icons.exclusive
@@ -101,19 +99,19 @@ export default function SignUpViewPage({ stars }: { stars: number }) {
             </p>
           </div>
           <p className='text-muted-foreground px-8 text-center text-sm'>
-            By clicking continue, you agree to our{' '}
+            {t('auth.byClickingContinue')}{' '}
             <Link
               href='/terms-of-service'
               className='hover:text-primary underline underline-offset-4'
             >
-              Terms of Service
+              {t('auth.termsOfService')}
             </Link>{' '}
             and{' '}
             <Link
               href='/privacy-policy'
               className='hover:text-primary underline underline-offset-4'
             >
-              Privacy Policy
+              {t('auth.privacyPolicy')}
             </Link>
             .
           </p>

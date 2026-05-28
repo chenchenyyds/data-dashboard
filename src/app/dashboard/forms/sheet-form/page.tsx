@@ -1,15 +1,16 @@
+'use client';
+
 import PageContainer from '@/components/layout/page-container';
 import SheetFormDemo from '@/features/forms/components/sheet-form-demo';
-
-export const metadata = {
-  title: 'Dashboard: Sheet Form'
-};
+import { useLanguage } from '@/contexts/language-context';
 
 export default function Page() {
+  const { t } = useLanguage();
+
   return (
     <PageContainer
-      pageTitle='Sheet & Dialog Forms'
-      pageDescription='Form patterns inside sheets and dialogs with external submit buttons.'
+      pageTitle={t('page.forms.sheet.title')}
+      pageDescription={t('page.forms.sheet.desc')}
     >
       <SheetFormDemo />
     </PageContainer>

@@ -1,4 +1,5 @@
 'use client';
+// TODO: Translate column headers (header, title, meta.label) using useLanguage() when columns are generated inside a component
 import { Badge } from '@/components/ui/badge';
 import { DataTableColumnHeader } from '@/components/ui/table/data-table-column-header';
 import type { User } from '../../api/types';
